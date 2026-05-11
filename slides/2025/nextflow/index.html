@@ -9,10 +9,10 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/theme/white.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/highlight/monokai.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;600&display=swap">
-  <link rel="stylesheet" type="text/css" href="../../assets/plugins/asciinema/dist/bundle/asciinema-player.css">
-  <link rel="stylesheet" href="../../assets/css/my_style.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/plugins/asciinema/dist/bundle/asciinema-player.css">
+  <link rel="stylesheet" href="../../../assets/css/my_style.css">
 
-  <script src="../../assets/plugins/asciinema/dist/bundle/asciinema-player.js"></script>
+  <script src="../../../assets/plugins/asciinema/dist/bundle/asciinema-player.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.min.js"></script>
 </head>
 
@@ -22,7 +22,7 @@
   <div class="reveal">
     <div class="slides">
       <section data-background-color="black">
-      <!-- <section class="r-stretch" data-background-image="../../assets/backgrounds/witsbits_cover.svg"> -->
+      <!-- <section class="r-stretch" data-background-image="../../../assets/backgrounds/witsbits_cover.svg"> -->
         <h1 class="r-fit-text" style="margin-bottom:-25px"><b>Introduction to Nextflow</b></h1>
         <h3 class="r-fit-text" style="margin-bottom:75px;">Building Robust { Reproducible, Portable, Scalable } Bioinformatics Workflows</h3>
         <p style="margin-bottom:-25px;">by Phelelani Mpangase</p>
@@ -58,26 +58,26 @@
         </section>
         
         <section>
-            <img class="r-stretch" src="../../assets/images/big_data.jpg" class="img" alt="Big Data">
+            <img class="r-stretch" src="../../../assets/images/big_data.jpg" class="img" alt="Big Data">
         </section>
 
         <!-- <section>
           <h2>Key Aspects of Big Data...</h2>
           <div class="five-cols" style="height: 200px;">
             <div class="icon-stack fragment" data-id="velocity" data-fragment-index="1">
-              <img src="../../assets/icons/velocity.gif"> Velocity
+              <img src="../../../assets/icons/velocity.gif"> Velocity
             </div>
             <div class="icon-stack fragment" data-id="volume" data-fragment-index="2">
-              <img src="../../assets/icons/volume.gif"> Volume
+              <img src="../../../assets/icons/volume.gif"> Volume
             </div>
             <div class="icon-stack fragment" data-id="value" data-fragment-index="3">
-              <img src="../../assets/icons/value.gif"> Value
+              <img src="../../../assets/icons/value.gif"> Value
             </div>
             <div class="icon-stack fragment" data-id="variety" data-fragment-index="4">
-              <img src="../../assets/icons/variety.gif"> Variety
+              <img src="../../../assets/icons/variety.gif"> Variety
             </div>
             <div class="icon-stack fragment" data-id="veracity" data-fragment-index="5">
-              <img src="../../assets/icons/veracity.gif"> Veracity
+              <img src="../../../assets/icons/veracity.gif"> Veracity
             </div>
           </div> -->
 
@@ -97,24 +97,24 @@
           </div> -->
 
 
-         <section  data-background-image="../../assets/backgrounds/witsbits_cover.svg">
+         <section  data-background-image="../../../assets/backgrounds/witsbits_cover.svg">
           <h2>Many scientific applications require:</h2>
           <div class="three-cols">  
             <div class="fragment fade-up">
               <p>
-                Multiple inputs <br> <img src="../../assets/icons/files.png" class="icon" alt="icon">
+                Multiple inputs <br> <img src="../../../assets/icons/files.png" class="icon" alt="icon">
               </p>
             </div>
 
             <div class="fragment fade-up">
               <p>
-                Multiple applications <br> <img src="../../assets/icons/applications.png" class="icon" alt="icon">
+                Multiple applications <br> <img src="../../../assets/icons/applications.png" class="icon" alt="icon">
               </p>
             </div>
 
             <div class="fragment fade-up">
               <p>
-                Multiple parameters <br> <img src="../../assets/icons/parameters.png" class="icon" alt="icon">
+                Multiple parameters <br> <img src="../../../assets/icons/parameters.png" class="icon" alt="icon">
               </p>
             </div>
           </div>
@@ -125,19 +125,19 @@
           <div class="three-cols">
             <div class="fragment fade-up">
               <p>
-                Have a low a level of abstraction <br> <img src="../../assets/icons/complexity.png" class="icon" alt="icon">
+                Have a low a level of abstraction <br> <img src="../../../assets/icons/complexity.png" class="icon" alt="icon">
               </p>
             </div>
             
             <div class="fragment fade-up">
               <p>
-                Can't separate workflow/application <br> <img src="../../assets/icons/decision.png" class="icon" alt="icon">
+                Can't separate workflow/application <br> <img src="../../../assets/icons/decision.png" class="icon" alt="icon">
               </p>
             </div>
             
             <div class="fragment fade-up">
               <p>
-                Can't reproducible results <br> <img src="../../assets/icons/reproduce.png" class="icon" alt="icon">
+                Can't reproducible results <br> <img src="../../../assets/icons/reproduce.png" class="icon" alt="icon">
               </p>
             </div>
           </div>
@@ -147,25 +147,25 @@
           <h2>Workflow Management System/Engine</h2>
           <p style="margin-top: -30px;">Must support the following to promote reproducible science:</p>
           <div class="five-cols" style="font-size: 0.5em; font-weight: bold; margin-bottom: -10px;">
-            <div data-fragment-index="1" ><img style="margin-bottom: -10px;" src="../../assets/icons/task.png"><br>Task definitions</div>
-            <div data-fragment-index="2" ><img style="margin-bottom: -10px;" src="../../assets/icons/dependency.png"><br>Dependency management</div>
-            <div data-fragment-index="3" ><img style="margin-bottom: -10px;" src="../../assets/icons/parallelisation.png"><br>Parallelisation</div>
-            <div data-fragment-index="4" ><img style="margin-bottom: -10px;" src="../../assets/icons/portable_2.png"><br>Portability</div>
-            <div data-fragment-index="5" ><img style="margin-bottom: -10px;" src="../../assets/icons/container.png"><br>Environment management</div>
+            <div data-fragment-index="1" ><img style="margin-bottom: -10px;" src="../../../assets/icons/task.png"><br>Task definitions</div>
+            <div data-fragment-index="2" ><img style="margin-bottom: -10px;" src="../../../assets/icons/dependency.png"><br>Dependency management</div>
+            <div data-fragment-index="3" ><img style="margin-bottom: -10px;" src="../../../assets/icons/parallelisation.png"><br>Parallelisation</div>
+            <div data-fragment-index="4" ><img style="margin-bottom: -10px;" src="../../../assets/icons/portable_2.png"><br>Portability</div>
+            <div data-fragment-index="5" ><img style="margin-bottom: -10px;" src="../../../assets/icons/container.png"><br>Environment management</div>
           </div>
           <div class="five-cols" style="font-size: 0.5em; font-weight: bold; margin-bottom: -10px;">
-            <div data-fragment-index="6" ><img style="margin-bottom: -10px;" src="../../assets/icons/resources.png"><br>Resource specification & scheduling</div>
-            <div data-fragment-index="7" ><img style="margin-bottom: -10px;" src="../../assets/icons/error_2.png"><br>Error tolerance</div>
-            <div data-fragment-index="8" ><img style="margin-bottom: -10px;" src="../../assets/icons/modular.png"><br>Modularity & re-use</div>
-            <div data-fragment-index="9" ><img style="margin-bottom: -10px;" src="../../assets/icons/input.png"><br>Input/output handling & file patterns</div>
-            <div data-fragment-index="10" ><img style="margin-bottom: -10px;" src="../../assets/icons/logging.png"><br>Logging & provenance</div>
+            <div data-fragment-index="6" ><img style="margin-bottom: -10px;" src="../../../assets/icons/resources.png"><br>Resource specification & scheduling</div>
+            <div data-fragment-index="7" ><img style="margin-bottom: -10px;" src="../../../assets/icons/error_2.png"><br>Error tolerance</div>
+            <div data-fragment-index="8" ><img style="margin-bottom: -10px;" src="../../../assets/icons/modular.png"><br>Modularity & re-use</div>
+            <div data-fragment-index="9" ><img style="margin-bottom: -10px;" src="../../../assets/icons/input.png"><br>Input/output handling & file patterns</div>
+            <div data-fragment-index="10" ><img style="margin-bottom: -10px;" src="../../../assets/icons/logging.png"><br>Logging & provenance</div>
           </div>
           <div class="five-cols" style="font-size: 0.5em; font-weight: bold; margin-bottom: -10px;">
-            <div data-fragment-index="11" ><img style="margin-bottom: -10px;" src="../../assets/icons/ecosystem.png"><br>Tooling & ecosystem</div>
-            <div data-fragment-index="12" ><img style="margin-bottom: -10px;" src="../../assets/icons/documentation.png"><br>Ease of authoring/language ergonomics </div>
-            <div data-fragment-index="13" ><img style="margin-bottom: -10px;" src="../../assets/icons/debugging.png"><br>Debugging & observability</div>
-            <div data-fragment-index="14" ><img style="margin-bottom: -10px;" src="../../assets/icons/compliance.png"><br>Security/compliance features</div>
-            <div data-fragment-index="15" ><img style="margin-bottom: -10px;" src="../../assets/icons/api.png"><br>Standardization & interoperability</div>
+            <div data-fragment-index="11" ><img style="margin-bottom: -10px;" src="../../../assets/icons/ecosystem.png"><br>Tooling & ecosystem</div>
+            <div data-fragment-index="12" ><img style="margin-bottom: -10px;" src="../../../assets/icons/documentation.png"><br>Ease of authoring/language ergonomics </div>
+            <div data-fragment-index="13" ><img style="margin-bottom: -10px;" src="../../../assets/icons/debugging.png"><br>Debugging & observability</div>
+            <div data-fragment-index="14" ><img style="margin-bottom: -10px;" src="../../../assets/icons/compliance.png"><br>Security/compliance features</div>
+            <div data-fragment-index="15" ><img style="margin-bottom: -10px;" src="../../../assets/icons/api.png"><br>Standardization & interoperability</div>
           </div>
           <div style="height: 150px; margin-top: 30px; background-color:black;"></div>
           <div class="stacked-paragraph" style="height: 140px; font-size: 1em; margin-top: -145px; background-color:white;">
@@ -187,13 +187,13 @@
           </div>
           <div class="three-cols fragment" style="height: 140px; margin-top: -140px; background-color: white">
             <div class="icon-stack" style="font-size: 0.5em;">
-              <img src="../../assets/icons/nextflow.png" style="height: 50px;">Groovy-based DSL<br>Nextflow runtime engine
+              <img src="../../../assets/icons/nextflow.png" style="height: 50px;">Groovy-based DSL<br>Nextflow runtime engine
             </div>
             <div class="icon-stack" style="font-size: 0.5em;">
-              <img src="../../assets/icons/wdl.png" style="height: 50px;">Declarative workflow language<br>Cromwell engine
+              <img src="../../../assets/icons/wdl.png" style="height: 50px;">Declarative workflow language<br>Cromwell engine
             </div>
             <div class="icon-stack" style="font-size: 0.5em;">
-              <img src="../../assets/icons/snakemake.png" style="height: 50px;">Python-based DSL<br>Snakemake engine
+              <img src="../../../assets/icons/snakemake.png" style="height: 50px;">Python-based DSL<br>Snakemake engine
             </div>
           </div>
         </section>
@@ -206,23 +206,23 @@
         </section>
 
         <section>
-          <img src="../../assets/icons/nextflow.png" class="img" alt="icon" height="100">
+          <img src="../../../assets/icons/nextflow.png" class="img" alt="icon" height="100">
           <p style="margin-top:-20px;"><a href="https://www.nextflow.io/">https://www.nextflow.io/</a></p>
           <h2>Groovy-based language for expressing workflows</h2>
           <div class="three-cols">
             <div class="fragment fade-up">
               <p>
-                Very easy to install <br> <img src="../../assets/icons/java.png" class="icon" alt="icon">
+                Very easy to install <br> <img src="../../../assets/icons/java.png" class="icon" alt="icon">
               </p>
             </div>
             <div class="fragment fade-up">
               <p>
-                Portable | Scalable Reproducible <br> <img src="../../assets/icons/github.png" class="icon" alt="icon">
+                Portable | Scalable Reproducible <br> <img src="../../../assets/icons/github.png" class="icon" alt="icon">
               </p>
             </div>
             <div class="fragment fade-up">
               <p>
-                Container support <br> <img src="../../assets/icons/docker.png" class="icon" alt="icon"> <img src="../../assets/icons/singularity.png" class="icon" alt="icon" width="120">
+                Container support <br> <img src="../../../assets/icons/docker.png" class="icon" alt="icon"> <img src="../../../assets/icons/singularity.png" class="icon" alt="icon" width="120">
               </p>
             </div>
           </div class="fragment fade-up">
@@ -245,7 +245,7 @@
           <div class="two-cols">
             <div class="fragment fade-up">
               <p>
-                Channels <br> <img src="../../assets/icons/channel.png" class="icon" alt="icon">
+                Channels <br> <img src="../../../assets/icons/channel.png" class="icon" alt="icon">
                 <br>
                 <ul>
                   <li>Handles inputs and outputs</li>
@@ -256,7 +256,7 @@
             </div>
             <div class="fragment fade-up">
               <p>
-                Processes <br> <img src="../../assets/icons/process.png" class="icon" alt="icon">
+                Processes <br> <img src="../../../assets/icons/process.png" class="icon" alt="icon">
                 <br>
                 <ul>
                   <li>Call program that does the analysis</li>
@@ -270,7 +270,7 @@
 
         <section>
           <h2 style="margin-bottom: -0.25em;">H3ABioNet GWAS QC Workflow</h2>
-          <img src="../../assets/images/gwas_qc_workflow.png" class="img" alt="flowchart" height="900px">
+          <img src="../../../assets/images/gwas_qc_workflow.png" class="img" alt="flowchart" height="900px">
         </section>
       </section>
 
@@ -487,17 +487,17 @@
           <div class="three-cols">
             <div>
               <p class="fragment fade-up">
-                I have 2-Mil files <br> (scalability) <br> <img src="../../assets/icons/scale_up.png" class="icon" alt="icon">
+                I have 2-Mil files <br> (scalability) <br> <img src="../../../assets/icons/scale_up.png" class="icon" alt="icon">
               </p>
             </div>
             <div>
               <p class="fragment fade-up">
-                Must get same results <br>(reproducibility) <br> <img src="../../assets/icons/repeat.png" class="icon" alt="icon">
+                Must get same results <br>(reproducibility) <br> <img src="../../../assets/icons/repeat.png" class="icon" alt="icon">
               </p>
             </div>
             <div>
               <p class="fragment fade-up">
-                My friend on Mars <br>(portable) <br> <img src="../../assets/icons/portable.png" height=150px class="icon" alt="icon">
+                My friend on Mars <br>(portable) <br> <img src="../../../assets/icons/portable.png" height=150px class="icon" alt="icon">
               </p>
             </div>
         </section>
@@ -592,12 +592,12 @@
           <div class="two-cols">
             <div>
               <p class="fragment fade-up">
-                Because of errors & goblins <br> <img src="../../assets/icons/error.png" class="icon" alt="icon">
+                Because of errors & goblins <br> <img src="../../../assets/icons/error.png" class="icon" alt="icon">
               </p>
             </div>
             <div>
               <p class="fragment fade-up">
-                Resume from process that failed <br> <img src="../../assets/icons/resume.png" class="icon" alt="icon">
+                Resume from process that failed <br> <img src="../../../assets/icons/resume.png" class="icon" alt="icon">
               </p>
             </div>
           </div>
@@ -606,7 +606,7 @@
         <section>
           <div id="resume"></div>
           <script>
-            AsciinemaPlayer.create("../../assets/casts/demo_nf_resume.cast", document.getElementById("resume"), {
+            AsciinemaPlayer.create("../../../assets/casts/demo_nf_resume.cast", document.getElementById("resume"), {
               preload: true,
               autoPlay: false,
               loop: false,
@@ -647,7 +647,7 @@
           <div class="r-stack" style="width:100%; height:700px;">
             <div class="fragment current-visible" data-fragment-index="0" id="log" style="width:100%"></div>
             <script>
-              AsciinemaPlayer.create("../../assets/casts/demo_nf_log.cast", document.getElementById("log"), {
+              AsciinemaPlayer.create("../../../assets/casts/demo_nf_log.cast", document.getElementById("log"), {
                 preload: true,
                 autoPlay: false,
                 loop: false,
@@ -661,9 +661,9 @@
                 pauseOnMarkers: true
               });
             </script>
-            <iframe class="fragment current-visible" data-fragment-index="1" data-src="../../assets/htmls/nf_report.html" width="100%" height="700px" frameborder="0" marginwidth="0" marginheight="0" scrolling="yes" allowfullscreen=""></iframe>
-            <iframe class="fragment current-visible" data-fragment-index="2" data-src="../../assets/htmls/nf_timeline.html" width="100%" height="700px" frameborder="0" marginwidth="0" marginheight="0" scrolling="yes" allowfullscreen=""></iframe>
-            <img class="fragment current-visible" data-fragment-index="3" src="../../assets/images/flowchart.svg" class="img" alt="flowchart" height="700px">
+            <iframe class="fragment current-visible" data-fragment-index="1" data-src="../../../assets/htmls/nf_report.html" width="100%" height="700px" frameborder="0" marginwidth="0" marginheight="0" scrolling="yes" allowfullscreen=""></iframe>
+            <iframe class="fragment current-visible" data-fragment-index="2" data-src="../../../assets/htmls/nf_timeline.html" width="100%" height="700px" frameborder="0" marginwidth="0" marginheight="0" scrolling="yes" allowfullscreen=""></iframe>
+            <img class="fragment current-visible" data-fragment-index="3" src="../../../assets/images/flowchart.svg" class="img" alt="flowchart" height="700px">
           </div>
         </section>
       </section>
@@ -1081,12 +1081,12 @@
           <div class="two-cols">
             <div>
               <p class="fragment fade-up">
-                Light-weight Unix virtualisation <br> abstraction layer <br> <img src="../../assets/icons/virtual.png" class="icon" alt="icon">
+                Light-weight Unix virtualisation <br> abstraction layer <br> <img src="../../../assets/icons/virtual.png" class="icon" alt="icon">
               </p>
             </div>
             <div>
               <p class="fragment fade-up">
-                Create containers locally <br> OR get from repositories <br> <img src="../../assets/icons/cloud.png" class="icon" alt="icon">
+                Create containers locally <br> OR get from repositories <br> <img src="../../../assets/icons/cloud.png" class="icon" alt="icon">
               </p>
             </div>
           </div>
@@ -1094,12 +1094,12 @@
           <div class="two-cols">
             <div>
               <p class="fragment fade-up">
-                Each process runs as a separate <br> container call <br> <img src="../../assets/icons/separate.png" class="icon" alt="icon">
+                Each process runs as a separate <br> container call <br> <img src="../../../assets/icons/separate.png" class="icon" alt="icon">
               </p>
             </div>
             <div>
               <p class="fragment fade-up">
-                Can use the same or different <br> container for processes <br> <img src="../../assets/icons/decision.png" class="icon" alt="icon">
+                Can use the same or different <br> container for processes <br> <img src="../../../assets/icons/decision.png" class="icon" alt="icon">
               </p>
             </div>
           </div>
@@ -1148,7 +1148,7 @@
         <section>
           <div id="containers_script"></div>
           <script>
-            AsciinemaPlayer.create("../../assets/casts/demo_nf_plink_docker.cast", document.getElementById("containers_script"), {
+            AsciinemaPlayer.create("../../../assets/casts/demo_nf_plink_docker.cast", document.getElementById("containers_script"), {
               preload: true,
               autoPlay: false,
               loop: false,
@@ -1296,10 +1296,10 @@
         </section>
         <section>
           <h2>Best Practices for Reproducible Scientific Workflows</h2>
-          <img src="../../assets/images/best_practices.svg" class="img fragment" style="width: 90%;">
+          <img src="../../../assets/images/best_practices.svg" class="img fragment" style="width: 90%;">
         </section>
         <section>
-          <img src="../../assets/icons/confused.png" style="width: 10%; margin-bottom: -25px;">
+          <img src="../../../assets/icons/confused.png" style="width: 10%; margin-bottom: -25px;">
           <p>Questions?</p>
         </section>
       </section>
