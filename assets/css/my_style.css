@@ -1,0 +1,152 @@
+li {
+    margin: 0px 0;
+    /* margin-bottom: 20px; */
+}
+/* Styles for the top-level list (Level 1) */
+ul li {
+  list-style-type: disc; /* Default: a filled circle */
+}
+
+/* Styles for lists nested two levels deep (Level 3) */
+ul ul li {
+  list-style-type: circle; /* A filled square */
+}
+
+/* Optionally, for lists nested three levels deep (Level 4) */
+ul ul ul li {
+  list-style-type: lower-alpha; /* Lowercase letters (if an <ol> is nested) */
+}
+
+h1, h2, h3 {
+    text-transform: none !important;
+    font-family: "Fira Sans", sans-serif;
+}
+.icon {
+/* font-size: 5em; */
+/* width: 150px; */
+/* color: #007acc; */
+margin-right: 10px;
+}
+.icon-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.icon-stack img, .icon-stack svg {
+    height: 150px;
+    /* height: auto; */
+    margin-bottom: 0px;
+}
+.icon-stack p, .icon-stack h2, .icon-stack h3 {
+    margin: 0;
+    text-align: center;
+}
+pre {
+    /* width: 100% !important; */
+    /* height: 200% !important; */
+    margin: auto !important;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+.reveal pre code {
+    font-size: 0.85em;
+    max-height: 700px;
+}
+.five-cols {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5em;
+    margin-top: 1em;
+}
+.five-cols > div {
+    flex: 1;
+    text-align: center;
+    padding: 0 1em;
+}    
+.four-cols {
+    display: flex;
+    justify-content: space-between;
+    gap: 2em;
+    margin-top: 1em;
+}
+.four-cols > div {
+    flex: 1;
+    text-align: center;
+    padding: 0 1em;
+}
+.three-cols {
+    display: flex;
+    justify-content: space-between;
+    gap: 2em;
+    margin-top: 1em;
+}
+.three-cols > div {
+    flex: 1;
+    text-align: center;
+    padding: 0 1em;
+}
+.two-cols {
+    display: flex;
+    justify-content: space-between;
+    gap: 0em;
+    /* margin-top: 0.8em; */
+    padding: 0px;
+}
+.two-cols > div {
+    flex: 50%;
+    text-align: center;
+}
+.two-cols-bullet {
+    display: flex;
+    align-items: center;   /* vertically align image + text */
+    gap: 0.5em;            /* small space between image and text */
+    padding: 0;
+}
+.two-cols-bullet .col-image {
+    flex: 0 0 20%;         /* fixed 20% column */
+    max-width: 20%;
+    text-align: center;    /* center the image if needed */
+}
+
+.two-cols-bullet .col-text {
+    flex: 0 0 80%;         /* fixed 80% column */
+    max-width: 80%;
+    text-align: left;      /* better for reading */
+}
+
+.link-ref {
+    font-size: medium;
+    margin-top: 0px ;
+}
+.stacked-paragraph {
+    position: relative;
+    height: 80px;  /* adjust to fit your text */
+}
+.stacked-paragraph p {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    text-align: center;
+}
+/* STACKED FRAGMENTS */
+.stacked-fragments {
+    position: relative;
+}
+.stacked-fragments > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  /* display: flex; */
+  /* align-items: left; */
+  /* justify-content: center; */
+}
+
+
+.reveal .slides section {
+  padding: 0;
+}
