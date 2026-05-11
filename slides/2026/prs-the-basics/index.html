@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Polygenic [Risk] Scores: The Basics</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/theme/white.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/highlight/monokai.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;600&display=swap">
+  <link rel="stylesheet" type="text/css" href="../../../assets/plugins/asciinema/dist/bundle/asciinema-player.css">
+  <link rel="stylesheet" href="../../../assets/css/my_style.css">
+
+  <script src="../../../assets/plugins/asciinema/dist/bundle/asciinema-player.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.min.js"></script>
+</head>
+
+<!--  -->
+<body>
+  <!-- START REVEAL -->
+  <div class="reveal">
+    <!-- START SLIDE CONTENT -->
+    <div class="slides">
+      <section data-background-color="black">
+        <h1 class="r-fit-text" style="margin-bottom:75px"><b>Polygenic [Risk] Scores: The Basics</b></h1>
+        <p style="margin-bottom:-25px;">by Phelelani Mpangase</p>
+        <p style="margin-bottom:75px; font-size:0.75em"><a href="mailto:someone@example.com">phelelani.mpangase@wits.ac.za</a></p>
+        <p style="font-size:0.75em; margin-bottom:1.5em">Sydney Brenner Institute for Molecular Bioscience  |  Biomedical Informatics and Translational Science
+          <br>Faculty of Health Sciences
+          <br>University of the Witwatersrand</p>
+      </section>
+
+      <section data-background-color="black">
+        <h1 class="r-fit-text"><a href="https://phelelani.github.io/bioinf-on-deck/slides/2026/prs-the-basics/">https://phelelani.github.io/bioinf-on-deck/slides/2026/prs-the-basics/</a></h1>
+      </section>
+
+      <section data-background-color="black">
+        <h1>We are going to cover...</h1>
+        <ul style="list-style-type:none; text-align:center; color: black;">
+          <li class="fragment fade-up"><h2><a href="#/big_data">Big Data & Reproducible Science</a></h2></li>
+          <li class="fragment fade-up"><h2><a href="#/engines">Workflow Management Systems/Engines</a></h2></li>
+          <li class="fragment fade-up"><h2><a href="#/containers">Containerisation</a></h2></li>
+          <li class="fragment fade-up"><h2><a href="#/scaling">Scaling, Documentation & Sharing</a></h2></li>
+          <li class="fragment fade-up"><h2><a href="#/overall">How the Pieces Fit Together</a></h2></li>
+        </ul>
+      </section>
+
+      <!-- ERA OF BIG DATA -->
+      <section>
+        <section data-background-color="black" id="big_data">
+          <h1>The Era of Big Data</h1>
+        </section>
+        
+        <section data-auto-animate>
+          <img style="width: 100%;" src="../../../assets/images/big_data.jpg" class="img" alt="Big Data">
+          <p class="link-ref" style="margin-top: -10px;">
+            <a href="https://ars.els-cdn.com/content/image/1-s2.0-S2590262822000090-gr2_lrg.jpg">https://ars.els-cdn.com/content/image/1-s2.0-S2590262822000090-gr2_lrg.jpg</a>
+          </p>
+        </section>
+
+        <section data-auto-animate>
+          <h2>Key Aspects of Big Data...</h2>
+          <div class="five-cols fragment" style="height: 200px;" data-fragment-index="2">
+            <div class="icon-stack" data-id="velocity">
+              <img src="../../../assets/icons/velocity.gif"> Velocity
+            </div>
+            <div class="icon-stack" data-id="volume">
+              <img src="../../../assets/icons/volume.gif"> Volume
+            </div>
+            <div class="icon-stack" data-id="value">
+              <img src="../../../assets/icons/value.gif"> Value
+            </div>
+            <div class="icon-stack" data-id="variety">
+              <img src="../../../assets/icons/variety.gif"> Variety
+            </div>
+            <div class="icon-stack" data-id="veracity">
+              <img src="../../../assets/icons/veracity.gif"> Veracity
+            </div>
+          </div>
+
+          <h2 class="fragment" style="margin-top: 100px;" data-fragment-index="3">Large "Healthcare" Datasets</h2>
+          <p class="fragment" style="margin-top: -25px;" data-fragment-index="3">Central to Modern Science</p>
+          <div class="fragment">
+            <p style="margin-bottom: -0.4em;">&#9675 Generation/storage exceeds capacity of traditional data processing systems</p>
+            <p style="margin-bottom: -0.4em;">&#9675 Various forms require various (new) approaches for handling and analysing</p>
+            <p style="margin-bottom: -0.4em;">&#9675 Growing need for advanced analytic techniques to extract meaningful insights</p>
+          </div>
+        </section>
+        
+        <section data-auto-animate>
+          <h2 class="" style="margin-top: 100px;">Large "Healthcare" Datasets</h2>
+          <p style="margin-top: -25px;">Central to Modern Science</p>
+
+          <div class="icon-stack fragment" style="font-size: 0.75em;">
+            <img src="../../../assets/icons/programmer_1.gif" style="height: 200px; margin-bottom: -25px;"> Researcher aka "Mr. 404"
+          </div>
+
+          <div class="three-cols" style="font-size: 0.75em;">
+            <div class="icon-stack fragment">
+              <img src="../../../assets/icons/reproduce.gif">
+              Must share analysis methods & reproduce results across different platforms<br><strong>(reproducibility issue)</strong>
+            </div>
+            <div class="icon-stack fragment">
+              <img src="../../../assets/icons/applications.gif">
+              Script uses multiple tools with complex installation steps & dependencies<br><strong>(portability issue)</strong>
+            </div>
+            <div class="icon-stack fragment">
+              <img src="../../../assets/icons/big_data_3.gif">
+              Automating the scripts is not enough for large & complex datasets<br><strong>(scalability issue)</strong>
+            </div>
+          </div>
+        </section>
+
+        <section data-auto-animate>
+          <H2>The Pillars of Reproducible Science</H2>
+          <div class="three-cols" style="font-size: 0.75em;">
+            <div class="icon-stack">
+              <img src="../../../assets/icons/reproduce.gif" style="height: 250px">
+              <p class="fragment" data-fragment-index="2"><strong>Workflow Management</strong><br>Use dedicated systems (e.g., Nextflow, WDL, Galaxy) to automate, connect, and manage multi-step analyses</p>
+            </div>
+            <div class="icon-stack">
+              <img src="../../../assets/icons/applications.gif" style="height: 250px">
+              <p class="fragment" data-fragment-index="2"><strong>Containerisation</strong><br>Package software and dependencies into a single, isolated unit (e.g., Docker, Singularity/Apptainer)</p>
+            </div>
+            <div class="icon-stack">
+              <img src="../../../assets/icons/big_data_3.gif" style="height: 250px">
+              <p class="fragment" data-fragment-index="2"><strong>Scaling & Sharing</strong><br>Run workflows on HPC or Cloud environment - use Version Control (Git) to track and share code</p>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h2>Reproducibility Matters in Modern Science</h2>
+          <div class="three-cols fragment" style="font-size: 0.75em;">
+            <div class="icon-stack">
+              <img src="../../../assets/icons/reliable.gif">
+              <strong>Credibility/trust in results</strong>
+            </div>
+            <div class="icon-stack">
+              <img src="../../../assets/icons/reproduce.gif">
+              <strong>Reuse of analytical pipelines</strong>
+            </div>
+            <div class="icon-stack">
+              <img src="../../../assets/icons/audit.gif">
+              <strong>Transparency and auditability</strong>
+            </div>
+          </div>
+          <div class="fragment" style="margin-top: 25px;">
+            <img src="../../../assets/images/fair.png" style="width: 75%;">
+            <p class="link-ref" style="margin-top: -40px;">
+              <a href="https://kf-beta-dev.kidsfirstdrc.org/assets/images/f554d2c0-7ae0-11e8-8def-ddba9c8697d1.png">https://kf-beta-dev.kidsfirstdrc.org/assets/images/f554d2c0-7ae0-11e8-8def-ddba9c8697d1.png</a>
+            </p>
+          </div>
+        </section>
+      </section>
+
+      <section>
+        <section data-background-color="black" id="engines">
+          <h1>Workflow Management Systems/Engines</h1>
+        </section>
+        <section>
+          <h2>Workflow Management System/Engine</h2>
+          <p style="margin-top: -30px;">Must support the following to promote reproducible science:</p>
+          <div class="five-cols" style="font-size: 0.5em; font-weight: bold; margin-bottom: -10px;">
+            <div data-fragment-index="1" class="fragment"><img style="margin-bottom: -10px;" src="../../../assets/icons/task.png"><br>Task definitions</div>
+            <div data-fragment-index="2" class="fragment"><img style="margin-bottom: -10px;" src="../../../assets/icons/dependency.png"><br>Dependency management</div>
+            <div data-fragment-index="3" class="fragment"><img style="margin-bottom: -10px;" src="../../../assets/icons/parallelisation.png"><br>Parallelisation</div>
+            <div data-fragment-index="4" class="fragment"><img style="margin-bottom: -10px;" src="../../../assets/icons/portable_2.png"><br>Portability</div>
+            <div data-fragment-index="5" class="fragment"><img style="margin-bottom: -10px;" src="../../../assets/icons/container.png"><br>Environment management</div>
+          </div>
+          <div class="five-cols" style="font-size: 0.5em; font-weight: bold; margin-bottom: -10px;">
+            <div data-fragment-index="6" class="fragment"><img style="margin-bottom: -10px;" src="../../../assets/icons/resources.png"><br>Resource specification & scheduling</div>
+            <div data-fragment-index="7" class="fragment"><img style="margin-bottom: -10px;" src="../../../assets/icons/error_2.png"><br>Error tolerance</div>
+            <div data-fragment-index="8" class="fragment"><img style="margin-bottom: -10px;" src="../../../assets/icons/modular.png"><br>Modularity & re-use</div>
+            <div data-fragment-index="9" class="fragment"><img style="margin-bottom: -10px;" src="../../../assets/icons/input.png"><br>Input/output handling & file patterns</div>
+            <div data-fragment-index="10" class="fragment"><img style="margin-bottom: -10px;" src="../../../assets/icons/logging.png"><br>Logging & provenance</div>
+          </div>
+          <div class="five-cols" style="font-size: 0.5em; font-weight: bold; margin-bottom: -10px;">
+            <div data-fragment-index="11" class="fragment"><img style="margin-bottom: -10px;" src="../../../assets/icons/ecosystem.png"><br>Tooling & ecosystem</div>
+            <div data-fragment-index="12" class="fragment"><img style="margin-bottom: -10px;" src="../../../assets/icons/documentation.png"><br>Ease of authoring/language ergonomics </div>
+            <div data-fragment-index="13" class="fragment"><img style="margin-bottom: -10px;" src="../../../assets/icons/debugging.png"><br>Debugging & observability</div>
+            <div data-fragment-index="14" class="fragment"><img style="margin-bottom: -10px;" src="../../../assets/icons/compliance.png"><br>Security/compliance features</div>
+            <div data-fragment-index="15" class="fragment"><img style="margin-bottom: -10px;" src="../../../assets/icons/api.png"><br>Standardization & interoperability</div>
+          </div>
+          <div style="height: 150px; margin-top: 30px; background-color:black;"></div>
+          <div class="stacked-paragraph" style="height: 140px; font-size: 1em; margin-top: -145px; background-color:white;">
+            <p class="fragment fade-in-then-out" data-fragment-index="1">Able to define individual computational tasks <br> (commands, inputs, outputs, resources)</p>
+            <p class="fragment fade-in-then-out" data-fragment-index="2">Automatic construction and execution of a directed acyclic graph (DAG) based on inputs/outputs or explicit dependencies</p>
+            <p class="fragment fade-in-then-out" data-fragment-index="3">Able to discover and run tasks in parallel <br> (dataflow, rule-based, etc.)</p>
+            <p class="fragment fade-in-then-out" data-fragment-index="4">Able to run the same workflow on different platforms <br> (local machine, HPC, cloud [AWS/GCP/Azure], Kubernetes, etc.)</p>
+            <p class="fragment fade-in-then-out" data-fragment-index="5">Support container (Docker/Singularity), Conda, or package managers to ensure reproducibility</p>
+            <p class="fragment fade-in-then-out" data-fragment-index="6">Support per-task CPU, memory, time, GPU and integration with schedulers/backends</p>
+            <p class="fragment fade-in-then-out" data-fragment-index="7">Support checkpointing, caching, and resume/retry features</p>
+            <p class="fragment fade-in-then-out" data-fragment-index="8">Support sub-workflows/modules, imports/includes, or reusable workflow components</p>
+            <p class="fragment fade-in-then-out" data-fragment-index="9">Support wildcards, streaming, or channel/file globbing</p>
+            <p class="fragment fade-in-then-out" data-fragment-index="10">Support execution logs, metadata, provenance tracking, and call-level reporting</p>
+            <p class="fragment fade-in-then-out" data-fragment-index="11">Community pipelines, registries (e.g., nf-core), GUI/portal integrations, templates</p>
+            <p class="fragment fade-in-then-out" data-fragment-index="12">How easy it is to write, read, and maintain workflows (syntax & language)?</p>
+            <p class="fragment fade-in-then-out" data-fragment-index="13">Dry-run, DAG visualization, per-step logs, easy debug tools</p>
+            <p class="fragment fade-in-then-out" data-fragment-index="14">Support for secrets, data locality, controlled backends (important for clinical use)</p>
+            <p class="fragment fade-in-then-out" data-fragment-index="15">Support for standards (CWL, GA4GH, TRS, Task/Workflow APIs) or converters</p>
+          </div>
+          <div class="three-cols fragment" style="height: 140px; margin-top: -140px; background-color: white">
+            <div class="icon-stack" style="font-size: 0.5em;">
+              <img src="../../../assets/icons/nextflow.png" style="height: 50px;">Groovy-based DSL<br>Nextflow runtime engine
+            </div>
+            <div class="icon-stack" style="font-size: 0.5em;">
+              <img src="../../../assets/icons/wdl.png" style="height: 50px;">Declarative workflow language<br>Cromwell engine
+            </div>
+            <div class="icon-stack" style="font-size: 0.5em;">
+              <img src="../../../assets/icons/snakemake.png" style="height: 50px;">Python-based DSL<br>Snakemake engine
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section>
+        <section data-background-color="black" id="containers">
+          <h1>Containerisation</h1>
+        </section>
+
+        <section>
+          <h2>Virtual Machine vs Container</h2>
+          <div class="two-cols">
+            <div style="font-size: 0.75em; margin-top: -30px;" class="fragment">
+              <img src="../../../assets/images/vm.png" style="width: 100%;">
+              <p style="font-size: medium; margin-top: -50px;">
+                <a href="https://k21academy.com/wp-content/uploads/2020/11/Virtual_Machine_Architecture_result-1.webp">https://k21academy.com/wp-content/uploads/2020/11/Virtual_Machine_Architecture_result-1.webp</a>
+              </p>
+              <br>
+              <p style="margin-top: -25px; margin-bottom: -25px;">&#9675 Emulate an entire Operating System</p>
+              <p style="margin-bottom: -25px;">&#9675 Heavy with high resource costs and large file sizes</p>              
+            </div>
+            <div style="font-size: 0.75em; margin-top: -30px;" class="fragment">
+              <img src="../../../assets/images/container.png" style="width: 100%;">
+              <p style="font-size: medium; margin-top: -50px;">
+                <a href="https://k21academy.com/wp-content/uploads/2020/11/output-onlinepngtools-16_result-1.webp">https://k21academy.com/wp-content/uploads/2020/11/output-onlinepngtools-16_result-1.webp</a>
+              </p>
+              <br>
+              <p style="margin-top: -25px; margin-bottom: -25px;">&#9675 Share the host machine's kernel</p>
+              <p style="margin-bottom: -25px;">&#9675 Lightweight and fast - offer superior performance</p>
+              <p style="margin-bottom: -25px;">&#9675 Run only the necessary applications</p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Containerisation</h2>
+          <p style="margin-top: -30px;">Docker & Singularity/Apptainer</p>
+          <div class="two-cols">
+            <div class="fragment" style="font-size: 0.75em;">
+              <img src="../../../assets/icons/docker-logo-blue.svg" style="height: 15%">
+              <p>
+                <ul>
+                  <li>Popular platform for building & sharing containers</li>
+                  <li>Linux-based software containers</li>
+                  <li>Containers built from a <kbd>"Dockerfile"</kbd></li>
+                  <li>Application (+ dependencies) packaged into a unit</li>
+                  <li><strong>Major drawbacks:</strong></li>
+                  <ul>
+                    <li>Security risk on shared HPC environments</li>
+                    <li>Requires root privileges to run</li>
+                  </ul>
+                </ul>
+              </p>
+            </div>
+            <div class="fragment" style="font-size: 0.75em;">
+              <img src="../../../assets/icons/apptainer.svg" style="height: 15%">
+              <p>
+                <ul>
+                  <li>Designed specifically for scientific and HPC use</li>
+                  <li>Built on the concept of "Mobility of Compute"</li>
+                  <li><strong>Key Features:</strong></li>
+                  <ul>
+                    <li>Secure by design</li>
+                    <li>No root privileges required</li>
+                    <li>Runs with user's existing privileges</li>
+                    <li>Ideal for shared HPC environments</li>
+                  </ul>
+                </ul>
+              </p>
+            </div>
+          </div>
+          <div class="three-cols" style="font-size: 0.75em; margin-top: -100px;">
+            <div class="icon-stack fragment">
+              <img src="../../../assets/icons/cargo.gif">Build with Docker
+            </div>
+            <div class="icon-stack fragment">
+              <img src="../../../assets/icons/upload.gif">Push to DockerHub
+            </div>
+            <div class="icon-stack fragment">
+              <img src="../../../assets/icons/download.gif">Pull with Singularity/Apptainer
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section>
+        <section data-background-color="black" id="scaling">
+          <h1>Scaling, Documentation & Sharing</h1>
+        </section>
+        <section>
+          <h2>Reproducible Science Depends on Workflows that:</h2>
+          <div class="three-cols" style="font-size: 0.7em;">
+            <div class="icon-stack fragment" data-fragment-index="1"><img src="../../../assets/icons/scale.png" >1. Scale consistently</div>
+            <div class="icon-stack fragment" data-fragment-index="2"><img src="../../../assets/icons/version_control.png" >2. Fully version-controlled</div>
+            <div class="icon-stack fragment" data-fragment-index="3"><img src="../../../assets/icons/container.png" >3. Shared with code & container</div>
+          </div>
+          <div class="stacked-fragments" style="height: 400px; font-size: 0.75em; margin-top: 50px;">
+            <div class="fragment fade-in-then-out" data-fragment-index="1">
+              <h2>Workflow Scaling:</h2>
+              <p style="margin-top: -30px;"><em>Ensures consistent results across different compute environments</em></p>
+              <ul>
+                <li>Scaling lets a workflow run identically on a laptop, HPC cluster, or cloud</li>
+                <li>Containerisation (Docker/Singularity) and workflow engines:</li>
+                  <ul>
+                    <li>Ensure the same code & environment regardless of where or how big the system is</li>
+                  </ul>
+                <li>Parallel execution and scheduler portability prevent human errors may arise</li>
+                <li>Results are stable and repeatable across different hardware, scales, and institutions</li>
+              </ul>
+            </div>
+            <div class="fragment fade-in-then-out" data-fragment-index="2">
+              <h2>Version Control:</h2>
+              <p style="margin-top: -30px;"><em>Captures exact states of code, parameters, and environments</em></p>
+              <ul>
+                <li>Git records every change, enabling precise tracking:</li>
+                  <ul>
+                    <li>Scripts, configs, reference versions, and parameters</li>
+                  </ul>
+                <li>Workflow engines often track versions of modules, containers, and dependencies</li>
+                <li>You can reproduce exactly what happened by checking out a tagged version of the repository</li>
+                <li>You can re-run any past version of a workflow and obtain consistent outputs</li>
+              </ul>
+            </div>
+            <div class="fragment" data-fragment-index="3">
+              <h2>Sharing:</h2>
+              <p style="margin-top: -30px;"><em>Ensures others can run the exact same workflow</em></p>
+              <ul>
+                <li>Sharing workflows through GitHub, nf-core, Dockstore, etc.</li>
+                <li>Allows others to access your code and the environment specifications</li>
+                <li>Standard workflow languages (Nextflow, WDL, Snakemake, CWL) make pipelines portable across systems</li>
+                <li>Shared containers and config profiles ensure that collaborators run the same versions of tools</li>
+                <li>Other researchers can replicate or extend your analysis with confidence</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section>
+        <section data-background-color="black" id="overall">
+          <h1>Putting It All Together...</h1>
+        </section>
+        <section>
+          <h2>Tools for Reproducible Scientific Workflows</h2>
+          <div>
+            <img src="../../../assets/images/reproducibility.svg" class="img fragment" style="width: 100%;">
+          </div>
+        </section>
+        <section>
+          <h2>Best Practices for Reproducible Scientific Workflows</h2>
+          <img src="../../../assets/images/best_practices.svg" class="img fragment" style="width: 90%;">
+        </section>
+      </section>
+      
+      <!-- TAKE HOME! -->
+      <section>
+        <!-- <section data-background-color="black" id="take_home">
+          <h1>Take Home...</h1>
+        </section> -->
+        <section>
+          <img src="../../../assets/icons/confused.png" style="width: 10%; margin-bottom: -25px;">
+          <p>Questions?</p>
+        </section>
+      </section>
+        <!-- END SLIDE CONTENT -->
+    </div>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/zoom/zoom.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/markdown/markdown.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/highlight/highlight.js"></script>
+  <script>
+    Reveal.initialize({
+      width: 1600,
+      height: 900,
+      margin: 0.02,
+      // minScale: 0.2,
+      // maxScale: 5.0,
+      backgroundTransition: 'fade',
+      hash: true,
+      plugins: [ RevealZoom, RevealMarkdown, RevealHighlight ],
+    });
+  </script>
+</body>
+</html>
