@@ -4,17 +4,17 @@ li {
 }
 /* Styles for the top-level list (Level 1) */
 ul li {
-  list-style-type: disc; /* Default: a filled circle */
+    list-style-type: disc; /* Default: a filled circle */
 }
 
 /* Styles for lists nested two levels deep (Level 3) */
 ul ul li {
-  list-style-type: circle; /* A filled square */
+    list-style-type: circle; /* A filled square */
 }
 
 /* Optionally, for lists nested three levels deep (Level 4) */
 ul ul ul li {
-  list-style-type: lower-alpha; /* Lowercase letters (if an <ol> is nested) */
+    list-style-type: lower-alpha; /* Lowercase letters (if an <ol> is nested) */
 }
 
 h1, h2, h3 {
@@ -22,10 +22,10 @@ h1, h2, h3 {
     font-family: "Fira Sans", sans-serif;
 }
 .icon {
-/* font-size: 5em; */
-/* width: 150px; */
-/* color: #007acc; */
-margin-right: 10px;
+    /* font-size: 5em; */
+    /* width: 150px; */
+    /* color: #007acc; */
+    margin-right: 10px;
 }
 .icon-stack {
     display: flex;
@@ -53,6 +53,8 @@ pre {
     font-size: 0.85em;
     max-height: 700px;
 }
+
+/* 4-COLUMN ENVIRONMENT */
 .five-cols {
     display: flex;
     justify-content: space-between;
@@ -63,7 +65,9 @@ pre {
     flex: 1;
     text-align: center;
     padding: 0 1em;
-}    
+}
+
+/* 4-COLUMN ENVIRONMENT */
 .four-cols {
     display: flex;
     justify-content: space-between;
@@ -75,6 +79,8 @@ pre {
     text-align: center;
     padding: 0 1em;
 }
+
+/* 3-COLUMN ENVIRONMENT */
 .three-cols {
     display: flex;
     justify-content: space-between;
@@ -86,6 +92,8 @@ pre {
     text-align: center;
     padding: 0 1em;
 }
+
+/* 2-COLUMN ENVIRONMENT */
 .two-cols {
     display: flex;
     justify-content: space-between;
@@ -97,6 +105,8 @@ pre {
     flex: 50%;
     text-align: center;
 }
+
+/* 2-COLUMN ENVIRONMENT WITH BULLETS */
 .two-cols-bullet {
     display: flex;
     align-items: center;   /* vertically align image + text */
@@ -108,7 +118,6 @@ pre {
     max-width: 20%;
     text-align: center;    /* center the image if needed */
 }
-
 .two-cols-bullet .col-text {
     flex: 0 0 80%;         /* fixed 80% column */
     max-width: 80%;
@@ -131,22 +140,60 @@ pre {
     margin: 0;
     text-align: center;
 }
+
 /* STACKED FRAGMENTS */
 .stacked-fragments {
     position: relative;
 }
 .stacked-fragments > div {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  margin: 0;
-  /* display: flex; */
-  /* align-items: left; */
-  /* justify-content: center; */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    display: grid;
+    place-items: center; 
+    text-align: center;
+    /* margin-left: auto;  */
+    /* margin-right: auto; */
+    /* align-items: center; */
+    /* justify-content: center; */
 }
 
+/* SLADE PADDING */
+.reveal .slides section {
+    padding: 0;
+}
 
 .reveal .slides section {
-  padding: 0;
+    width: 100%;
 }
+
+.two-column-custom {
+    display: grid;
+    grid-template-columns: var(--left, 1fr) var(--right, 1fr);
+    gap: 2rem;
+    align-items: center;
+}
+
+.citation {
+    font-size: 0.45em;
+    opacity: 0.65;
+    margin-top: 0.5rem;
+}
+
+.panel-dark {
+    background-color: #1e293b;
+    color: white;
+    display: inline-block;
+    /* padding-left: -100px; */
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    /* width: 50%; */
+    /* align-items: center; */
+    border-radius: 20px;
+}
+
+/* body {
+    background: red !important;
+} */    

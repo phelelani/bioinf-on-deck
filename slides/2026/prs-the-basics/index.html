@@ -10,10 +10,23 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/highlight/monokai.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;600&display=swap">
   <link rel="stylesheet" type="text/css" href="../../../assets/plugins/asciinema/dist/bundle/asciinema-player.css">
-  <link rel="stylesheet" href="../../../assets/css/my_style.css">
-
+  
   <script src="../../../assets/plugins/asciinema/dist/bundle/asciinema-player.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/math/math.js"></script>
+  
+  <!-- <link rel="stylesheet" href="../../../assets/css/my_style_fixed.css"> -->
+  <link rel="stylesheet" href="../../../assets/css/my_style.css">
+
+
+  <script>
+  window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)']],
+    displayMath: [['\\[', '\\]']]
+  }
+  };
+  </script>
 </head>
 
 <!--  -->
@@ -22,29 +35,568 @@
   <div class="reveal">
     <!-- START SLIDE CONTENT -->
     <div class="slides">
-      <section data-background-color="black">
-        <h1 class="r-fit-text" style="margin-bottom:75px"><b>Polygenic [Risk] Scores: The Basics</b></h1>
-        <p style="margin-bottom:-25px;">by Phelelani Mpangase</p>
-        <p style="margin-bottom:75px; font-size:0.75em"><a href="mailto:someone@example.com">phelelani.mpangase@wits.ac.za</a></p>
-        <p style="font-size:0.75em; margin-bottom:1.5em">Sydney Brenner Institute for Molecular Bioscience  |  Biomedical Informatics and Translational Science
-          <br>Faculty of Health Sciences
-          <br>University of the Witwatersrand</p>
+      <section>
+        <section data-background-color="white">
+          <h1 class="r-fit-text" style="margin-bottom:75px"><b>Polygenic [Risk] Scores: The Basics</b></h1>
+          <p style="margin-bottom:-25px;">by Phelelani Mpangase</p>
+          <p style="margin-bottom:75px; font-size:0.75em"><a href="mailto:someone@example.com">phelelani.mpangase@wits.ac.za</a></p>
+          <p style="font-size:0.75em; margin-bottom:1.5em">Sydney Brenner Institute for Molecular Bioscience  |  Biomedical Informatics and Translational Science
+            <br>Faculty of Health Sciences
+            <br>University of the Witwatersrand</p>
+        </section>
+
+        <section data-background-color="white" data-auto-animate>
+          <img src="../../../assets/icons/teaching.gif" style="height: 300px; margin-bottom: -25px;">
+          <h1>We are going to cover...</h1>
+        </section>
+
+        <section data-background-color="white" data-auto-animate>
+          <img src="../../../assets/icons/teaching.gif" style="height: 200px; margin-bottom: 50px;">
+          <br>
+          <ul style="list-style-type:none; text-align:center; color: white;">
+            <li class="fragment fade-up" style="margin-bottom:10px;"><h2><a href="#/inheritance">Patterns of Inheritance</a></h2></li>
+            <li class="fragment fade-up" style="margin-bottom:10px;"><h2><a href="#/variants">Discovering [Risk] Variants</a></h2></li>
+            <li class="fragment fade-up" style="margin-bottom:10px;"><h2><a href="#/gwas">Genome-Wide Association Studies</a></h2></li>
+            <li class="fragment fade-up" style="margin-bottom:10px;"><h2><a href="#/prs">Polygenic [Risk] Scores</a></h2></li>
+            <li class="fragment fade-up" style="margin-bottom:10px;"><h2><a href="#/prs-africa">PRS in African Populations</a></h2></li>
+          </ul>
+        </section>
+
+        <section data-background-color="white" data-auto-animate>
+          <img src="../../../assets/icons/understand.gif" style="height: 300px; margin-bottom: -25px;">
+          <h1>Learning outcomes</h1>
+        </section>
+
+        <section data-background-color="white" data-auto-animate>
+          <img src="../../../assets/icons/understand.gif" style="height: 200px; margin-bottom: 50px;">
+          <br>
+          <ul style="list-style-type:none; text-align:left;">
+            <li class="fragment fade-up" style="margin-bottom: 0.5em;">Understand Genome-Wide Association Studies (GWAS)</li>
+            <li class="fragment fade-up" style="margin-bottom: 0.5em;">Understand the importance of GWAS to Polygenic [Risk] Scores (PRSs)</li>
+            <li class="fragment fade-up" style="margin-bottom: 0.5em;">Understand the summary statistics file</li>
+            <li class="fragment fade-up" style="margin-bottom: 0.5em;">Define a PRS</li>
+            <li class="fragment fade-up" style="margin-bottom: 0.5em;">Understand steps for calculating a PRS</li>
+            <li class="fragment fade-up" style="margin-bottom: 0.5em;">Understand inputs and considerations for PRS calculation</li>
+            <li class="fragment fade-up" style="margin-bottom: 0.5em;">Understand the applications for PRS</li>
+            <li class="fragment fade-up" style="margin-bottom: 0.5em;">Understand the limitations of PRS in an African context</li>
+          </ul>
+        </section>
+
+        <section data-background-color="white">
+          <h1 class="r-fit-text"><a href="https://phelelani.github.io/bioinf-on-deck/slides/2026/prs-the-basics/">https://phelelani.github.io/bioinf-on-deck/slides/2026/prs-the-basics/</a></h1>
+        </section>
       </section>
 
-      <section data-background-color="black">
-        <h1 class="r-fit-text"><a href="https://phelelani.github.io/bioinf-on-deck/slides/2026/prs-the-basics/">https://phelelani.github.io/bioinf-on-deck/slides/2026/prs-the-basics/</a></h1>
+      <!-- PATTERNS OF INHERITANCE -->
+      <section>
+        <section data-background-color="white" id="inheritance">
+          <img src="../../../assets/icons/inheritance.gif" style="width: 300px; margin-bottom: -25px;">
+          <h1>Patterns of Inheritance</h1>
+        </section>
+
+        <section data-auto-animate>
+          <img style="width: 100%;" src="../../../assets/images/big_data.jpg" class="img" alt="Big Data">
+          <p class="link-ref" style="margin-top: -10px;">
+            <a href="https://ars.els-cdn.com/content/image/1-s2.0-S2590262822000090-gr2_lrg.jpg">https://ars.els-cdn.com/content/image/1-s2.0-S2590262822000090-gr2_lrg.jpg</a>
+          </p>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom: -1rem;">The Omics Era:</h2>
+          <h3>Approaches to Understanding Diseases</h3>
+          <br>
+          <div class="two-cols">
+            <div class="fragment">
+              <img style="width: 100%; margin-top: 5rem;" src="images/central-dogma.png">
+            </div>
+            <div class="fragment">
+              <img style="width: 100%;" src="images/omics_integration.png">
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Genetic Variation</h2>
+          <br>
+          <div class="two-cols fragment">
+            <div>
+              <img style="width: 100%;" src="images/SNP.jpg">
+            </div>
+            <div style="font-size: 2rem;">
+              <ul>
+                <li>Most of the genetic code is identical between individuals</li>
+                <li>Differences in the genetic code:</li>
+                <ul>
+                  <li>Genetic variants</li>
+                </ul>
+                <li>Contribute to traits that make us unique:</li>
+                <ul>
+                  <li>Eye colour</li>
+                  <li>Height</li>
+                  <li>Taste preferences</li>
+                </ul>
+                <li>Contribute towards risk of developing certain diseases:</li>
+                <ul>
+                  <li>Risk variants</li>
+                </ul>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section data-auto-animate="inheritance">
+          <h2 style="margin-bottom: -1rem;">Patterns of Inheritance:</h2>
+          <h3>Mendelian</h3>
+          <div style="height: 800px">
+            <img style="width: 80%;" src="images/autosomal_fixed.png">
+          </div>
+        </section>
+
+        <section data-auto-animate="inheritance">
+          <h2 style="margin-bottom: -1rem;">Patterns of Inheritance:</h2>
+          <h3>Non-Mendelian</h3>
+          <div style="margin-top: -1rem;">
+            <img style="width: 75%;" src="images/multifactorial_traits.png">
+          </div>
+        </section>        
       </section>
 
-      <section data-background-color="black">
-        <h1>We are going to cover...</h1>
-        <ul style="list-style-type:none; text-align:center; color: black;">
-          <li class="fragment fade-up"><h2><a href="#/big_data">Big Data & Reproducible Science</a></h2></li>
-          <li class="fragment fade-up"><h2><a href="#/engines">Workflow Management Systems/Engines</a></h2></li>
-          <li class="fragment fade-up"><h2><a href="#/containers">Containerisation</a></h2></li>
-          <li class="fragment fade-up"><h2><a href="#/scaling">Scaling, Documentation & Sharing</a></h2></li>
-          <li class="fragment fade-up"><h2><a href="#/overall">How the Pieces Fit Together</a></h2></li>
-        </ul>
+      <!-- DISCOVERING RISK VARIANTS -->
+      <section>
+        <section data-background-color="white" id="variants">
+          <img src="../../../assets/icons/mutation.gif" style="height: 300px; margin-bottom: -25px;">
+          <h1>Discovering [Risk] Variants</h1>
+        </section>
+
+        <section data-auto-animate="risk_vars">
+          <img src="images/risk_var_1.png" style="height: 800px;" data-id="risk_vars_fig">
+          <div style="height: 100px; font-size: 0.75em">
+            Compare genomes: cases vs controls.
+          </div>
+        </section>
+
+        <section data-auto-animate="risk_vars">
+          <img src="images/risk_var_2.png" style="height: 800px;" data-id="risk_vars_fig">
+          <div style="height: 100px; font-size: 0.75em">
+            Variants more frequently in cases - associated with an increased risk!
+          </div>
+        </section>
+
+        <section data-auto-animate="risk_vars">
+          <img src="images/risk_var_3.png" style="height: 800px;" data-id="risk_vars_fig">
+          <div style="height: 100px; font-size: 0.75em">
+            Variants more frequently in controls - associated with a decreased risk!
+          </div>
+        </section>
+  
+        <section data-auto-animate="risk_vars">
+          <img src="images/risk_var_4.png" style="height: 800px;" data-id="risk_vars_fig">
+          <div class="stacked-fragments" style="height: 100px; font-size: 0.75em">
+            <div class="fragment fade-out">
+              Risk variants can increase or decrease the risk of disease. A single, small impact variant <br> has little impact on the risk... but many of them together have a larger impact!
+            </div>
+            <div class="fragment">
+              <img src="images/impact.png" style="height: 80px; margin-top: -10px;">
+            </div>
+          </div>
+        </section>
       </section>
+
+      <!-- GENOME-WIDE ASSOCIATION STUDIES -->
+      <section>
+        <section data-background-color="white" id="gwas">
+          <img src="../../../assets/icons/genomic.gif" style="height: 300px; margin-bottom: -25px;">
+          <h1>Genome-Wide Association Studies</h1>
+        </section>
+
+        <section data-auto-animate="gwas">
+          <h3>The discovery of associations between certain variations in our genetic code and a certain physical traits</h3>
+          <div class="stacked-fragments" style="height: 750px;">
+            <div class="fragment fade-in-then-out">
+              <img src="images/gwas_infographics.jpg" style="height: 750px;">
+            </div>
+            <div class="fragment fade-in-then-out">
+              <img src="images/gwas_h.png" style="height: 750px;">
+            </div>
+          </div>
+        </section>
+
+        <!-- GWAS TRANSISIONS -->
+        <section data-auto-animate="gwas">
+          <div class="stacked-fragments" style="height: 100px;">
+          </div>
+          <div style="display: flex; gap: 2rem; align-items: center;">
+            <div style="flex: 6; font-size: 0.5em;">
+              <div class="stacked-fragments" style="height: 800px;">
+                <img src="images/gwas_h.png" style="height: 100%;" data-id="gwas_fig">
+              </div>
+            </div>
+            <div style="flex: 4; font-size: 0.75em;">
+              <div style="width: 100%; height: 800px;">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section data-auto-animate="gwas">
+          <div class="stacked-fragments" style="height: 100px;">
+            <div class="fragment fade-out" data-fragment-index="2"><h3>1. Data Collection</h3></div>
+            <div class="fragment fade-in-then-out" data-fragment-index="2"><h3>2. Genotyping</h3></div>
+            <div class="fragment fade-in-then-out" data-fragment-index="3"><h3>3. Quality Control</h3></div>
+            <div class="fragment fade-in-then-out" data-fragment-index="4"><h3>4. Imputation</h3></div>
+            <div class="fragment fade-in-then-out" data-fragment-index="5"><h3>5. Association Testing</h3></div>
+          </div>
+          <div style="display: flex; gap: 0rem; align-items: center;">
+            <div style="flex: 6; font-size: 0.5em;">
+              <div class="stacked-fragments" style="height: 800px;">
+                <div><img src="images/gwas_a.png" style="height: 100%;" data-id="gwas_fig"></div>
+                <div class="fragment" data-fragment-index="2"><img src="images/gwas_b.png" style="height: 100%;" data-id="gwas_fig"></div>
+                <div class="fragment" data-fragment-index="3"><img src="images/gwas_c.png" style="height: 100%;" data-id="gwas_fig"></div>
+                <div class="fragment" data-fragment-index="4"><img src="images/gwas_d.png" style="height: 100%;" data-id="gwas_fig"></div>
+                <div class="fragment" data-fragment-index="5"><img src="images/gwas_e.png" style="height: 100%;" data-id="gwas_fig"></div>
+              </div>
+            </div>
+            <div style="flex: 4; font-size: 0.75em;">
+              <div class="stacked-fragments" style="width: 100%; height: 800px;">
+                <div class="panel-dark fragment fade-out" data-fragment-index="2" style="height: 800px; padding-right: 100px;">
+                  <ul>
+                    <li>Large sample sizes:</li>
+                    <ul>
+                      <li>Reproducible genome-wide significant associations</li>
+                    </ul>
+                    <li>Quantitative traits:</li>
+                    <ul>
+                      <li>Measurements on whole study sample</li>
+                    </ul>
+                    <li>Dichotomous traits:</li>
+                    <ul>
+                      <li>Inclusion of cases and controls</li>
+                    </ul>
+                    <li>Choice of data resource and study design:</li>
+                    <ul>
+                      <li>Sample size</li>
+                      <li>Experimental question</li>
+                      <li>Availability of pre-existing data</li>
+                      <li>Ease of new data can be collection</li>
+                    </ul>
+                  </ul>
+                </div>
+
+                <div class="panel-dark fragment fade-in-then-out" data-fragment-index="2" style="height: 800px; padding-right: 100px;">
+                  <ul>
+                    <li>Choice of genotyping platform:</li>
+                    <ul>
+                      <li>Depends on many factors</li>
+                      <li>Guided by the purpose of the GWAS</li>
+                    </ul>
+                    <li>Next-generation sequencing methods</li>
+                    <ul>
+                      <li>Whole Genome Sequencing (WGS)</li>
+                      <li>Whole Exome Sequencing (WES)</li>
+                    </ul>
+                    <li>Microarrays for common variants</li>
+                    <ul>
+                      <li>Most commonly used method</li>
+                      <li>Lower cost</li>
+                    </ul>
+                  </ul>
+                </div>
+
+                <div class="panel-dark fragment fade-in-then-out" data-fragment-index="3" style="height: 800px; padding-right: 100px;">
+                  <ul>
+                    <li>GWAS input files:</li>
+                    <ul>
+                      <li>Anonymized individual IDs</li>
+                      <li>Coded family</li>
+                      <li>Sex</li>
+                      <li>Phenotype</li>
+                      <li>Covariates</li>
+                      <li>Genotype calls</li>
+                      <li>Info on genotyping batch</li>
+                    </ul>
+                    <li>Quality control:</li>
+                    <ul>
+                      <li>Remove rare/monomorphic variants</li>
+                      <li>Remove variants not in Hardy–Weinberg equilibrium</li>
+                      <li>Filter missing SNPs</li>
+                      <li>Identify and remove genotyping errors</li>
+                      <li>Match phenotypes with genetic data</li>
+                      <li>Population strata and PCA</li>
+                    </ul>
+                  </ul>
+                </div>
+
+                <div class="panel-dark fragment fade-in-then-out" data-fragment-index="4" style="height: 800px; padding-right: 100px;">
+                  <ul>
+                    <li>Variants usually undergo phasing and are imputed:</li>
+                    <ul>
+                      <li>Sequenced haplotype reference panel: 1000 Genomes Project</li>
+                      <li>Statistical inference of genotypes not been assayed directly</li>
+                      <li>Increase statistical genomic coverage</li>
+                      <li>Facilitates meta-analysis of studies</li>
+                      <li>Use of genotyping obtained with different panels</li>
+                      <li>Increasing genetic markers that can be tested for association</li>
+                    </ul>
+                  </ul>
+                </div>
+
+                <div class="panel-dark fragment fade-in-then-out" data-fragment-index="5" style="height: 800px; padding-right: 100px;">
+                  <ul>
+                    <li>Genetic association tests for each genetic variant</li>
+                    <li>Use an appropriate model:</li>
+                    <ul>
+                      <li>Additive</li>
+                      <li>Non-additive</li>
+                      <li>Linear</li>
+                      <li>Logistic regression</li>
+                    </ul>
+                    <li>Depends on phenotype:</li>
+                    <ul>
+                      <li>Continuous or binary</li>
+                    </ul>
+                    <li>Covariates included</li>
+                    <li>Confounders corrected for</li>
+                    <li>Multiple testing needs to be controlled</li>
+                    <li>Output inspected for unusual patterns</li>
+                    <li>Multiple smaller cohorts are combined</li>
+                    <li>Summary statistics are generated</li>
+                  </ul>
+                </div>                
+
+              </div>
+            </div>
+        </section>
+
+        <section data-auto-animate="gwas">
+          <div class="stacked-fragments" style="height: 100px;">
+            <div><h3>5. Association Testing</h3></div>
+          </div>
+        </section>
+
+        <section data-auto-animate="gwas">
+          <div class="stacked-fragments" style="height: 100px;">
+            <div><h3>5. Association Testing</h3></div>
+          </div>
+          <div class="stacked-fragments" style="height: 600px;">
+            <div class="fragment fade-out" data-fragment-index="2"> <img src="images/ass_1.png" style="width: 65%;" data-id="assoc_fig"> </div>
+            <div class="fragment fade-in-then-out" data-fragment-index="2"> <img src="images/ass_2.png" style="width: 65%;" data-id="assoc_fig"> </div>
+            <div class="fragment fade-in-then-out" data-fragment-index="3"> <img src="images/ass_3.png" style="width: 65%;" data-id="assoc_fig"> </div>
+            <div class="fragment fade-in-then-out" data-fragment-index="4"> <img src="images/ass_4.png" style="width: 65%;" data-id="assoc_fig"> </div>
+            <div class="fragment fade-in-then-out" data-fragment-index="5"> <img src="images/ass_3.png" style="width: 65%;" data-id="assoc_fig"> </div>
+            <div class="fragment fade-in-then-out" data-fragment-index="6"> <img src="images/ass_3.png" style="width: 65%;" data-id="assoc_fig"> </div>
+            <div class="fragment fade-in-then-out" data-fragment-index="7"> <img src="images/ass_5.png" style="width: 65%;" data-id="assoc_fig"> </div>
+            <div class="fragment fade-in-then-out" data-fragment-index="8"> <img src="images/ass_6.png" style="width: 65%;" data-id="assoc_fig"> </div>
+          </div>
+          <br>
+          <div class="stacked-fragments" style="font-size: 0.75em; width: 1200px; margin-left: auto; margin-right: auto;">
+            <div class="panel-dark fragment fade-out" data-fragment-index="2" style="height: 200px;">
+              <ul>
+                <li>Regression analysis performed for every SNP - each individual as a data point</li>
+                <li>SNP ID #1 association with BMI</li>
+                <ul>
+                  <li>Two alleles: A & T</li>
+                  <li>Possible combinations: AA AT TT</li>
+                </ul>
+              </ul>
+            </div>
+            <div class="panel-dark fragment fade-in-then-out" data-fragment-index="2" style="height: 200px;">
+              <ul>
+                <li>Plot number of T alleles vs BMI</li>
+              </ul>
+            </div>
+            <div class="panel-dark fragment fade-in-then-out" data-fragment-index="3" style="height: 200px;">
+              <ul>
+                <li>Fit a line through the data</li>
+              </ul>
+            </div>
+            <div class="panel-dark fragment fade-in-then-out" data-fragment-index="4" style="height: 200px;">
+              <ul>
+                <li>Horizontal line: NO association</li>
+              </ul>
+            </div>
+            <div class="panel-dark fragment fade-in-then-out" data-fragment-index="5" style="height: 200px;">
+              <ul>
+                <li>Slope: association present</li>
+              </ul>
+            </div>
+            <div class="panel-dark fragment fade-in-then-out" data-fragment-index="6" style="height: 200px;">
+              <ul>
+                <li>Record P-Value</li>
+                <ul>
+                  <li style="font-size: 0.8em;"><i>Measure of the likelihood that the association found in the distribution of data points was due to chance given that the given that there is no association between the SNP and BMI</i></li>
+                </ul>
+                <li>Record the slope of the regression line</li>
+                <ul>
+                  <li style="font-size: 0.8em;"><i>Effect size or impact</i></li>
+                </ul>
+              </ul>
+            </div>
+            <div class="panel-dark fragment fade-in-then-out" data-fragment-index="7" style="height: 200px;">
+              <ul>
+                <li>Determine statistical significance of the association</li>
+                <ul>
+                  <li style="font-size: 0.8em;"><i>Is the association significant?</i></li>
+                  <li style="font-size: 0.8em;"><i>Results with P-Value less than 0.05 (5%) considered significant</i></li>
+                  <li style="font-size: 0.8em;"><i>Can also have false positives - random chance</i></li>
+                </ul>
+              </ul>
+            </div>
+            <div class="panel-dark fragment fade-in-then-out" data-fragment-index="8" style="height: 200px;">
+              <i>Correcting for the increased error rates in hypothesis <br> testing that had multiple comparisons (5x10−8)</i>
+            </div>
+          </div>
+        </section>
+
+        <section data-auto-animate="gwas">
+          <div class="stacked-fragments" style="height: 100px;">
+            <div><h3>5. Association Testing</h3></div>
+          </div>
+          <div><img src="images/manhattan-plot-for-genome-wide-association-studies-gwas.png" style="width: 75%;"></div>
+        </section>
+
+        <section data-auto-animate="gwas">
+          <div class="stacked-fragments" style="height: 100px;">
+            <div><h3>5. Association Testing</h3></div>
+          </div>
+          <div class="two-cols">
+            <div><img src="images/recombination.jpg" style="width: 75%;"></div>
+            <div style="height: 800px; width: 80%;">
+              <ul>
+                <li>When conducting a GWAS, genotypes of variants that are physically close together are not independent as they tend to be in linkage disequilibrium (LD)</li>
+                <ul>
+                  <li>LD: Nonrandom association between two or more loci in a population</li>
+                  <li>Strength of correlation between two variants is a function of the distance between them - the closer two variants are, the stronger the LD.</li>
+                </ul>
+              </ul>
+            </div>
+          </div>
+        </section>        
+
+        <!-- BACK ON THE ROAD -->
+        <section data-auto-animate="gwas">
+          <div class="stacked-fragments" style="height: 100px;">
+            <div class="fragment fade-out" data-fragment-index="2"><h3>6. Meta-Analysis</h3></div>
+            <div class="fragment fade-in-then-out" data-fragment-index="2"><h3>7. Replication</h3></div>
+            <div class="fragment fade-in" data-fragment-index="3"><h3>8. Post-GWAS Analyses</h3></div>
+          </div>
+          <div style="display: flex; gap: 0rem; align-items: center;">
+            <div style="flex: 6; font-size: 0.5em;">
+              <div class="stacked-fragments" style="height: 800px;">
+                <div><img src="images/gwas_f.png" style="height: 100%;" data-id="gwas_fig"></div>
+                <div class="fragment" data-fragment-index="2"><img src="images/gwas_g.png" style="height: 100%;" data-id="gwas_fig"></div>
+                <div class="fragment" data-fragment-index="3"><img src="images/gwas_h.png" style="height: 100%;" data-id="gwas_fig"></div>
+              </div>
+            </div>
+            <div style="flex: 4; font-size: 0.75em;">
+              <div class="stacked-fragments" style="width: 100%; height: 800px;">
+                <div class="panel-dark fragment fade-out" data-fragment-index="2" style="height: 800px; padding-right: 100px;">
+                  <ul>
+                    <li>Results from multiple smaller cohorts combined using standardized statistical pipelines</li>
+                  </ul>
+                </div>
+
+                <div class="panel-dark fragment fade-in-then-out" data-fragment-index="2" style="height: 800px; padding-right: 100px;">
+                  <ul>
+                    <li>GWAS Results can be replicated:</li>
+                    <ul>
+                      <li>Internal replication</li>
+                      <li>External replication in an independent cohort</li>
+                    </ul>
+                    <li>External replication:</li>
+                    <ul>
+                      <li>The independent cohort must be ancestrally matched and not share individuals or family members with the discovery cohort</li>
+                    </ul>
+                  </ul>
+                </div>
+
+                <div class="panel-dark fragment fade-in" data-fragment-index="3" style="height: 800px; padding-right: 100px;">
+                  <ul>
+                    <li>In silico analysis of GWAS using information from external resources:</li>
+                    <ul>
+                      <li>In silico fine-mapping</li>
+                      <li>SNP to gene mapping</li>
+                      <li>Gene to function mapping</li>
+                      <li>Pathway analysis</li>
+                      <li>Genetic correlation analysis</li>
+                      <li>Mendelian randomization</li>
+                      <li>Polygenic risk prediction</li>
+                    </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section> 
+      </section>
+
+      <!-- POLYGENIC [RISK] SCORES -->
+      <section>
+        <section data-background-color="white" id="prs">
+          <img src="../../../assets/icons/meter.gif" style="height: 300px; margin-bottom: -25px;">
+          <h1>Polygenic [Risk] Scores</h1>
+        </section>
+
+        <section>
+          <div>
+            <p>“An estimate of an individual’s genetic liability to a trait or disease, calculated according to their genotype profile and relevant genome-wide association study (GWAS) data”</p>
+            <p style="font-size:0.6em; opacity:0.6;">~ Choi et al. (2020)</p>
+          </div>
+          <br>
+          <div class="two-cols">
+            <div class="fragment" >
+              <div style="width: 100%; text-align: center; margin-bottom: 0rem; font-size: 4rem;">
+                \[
+                \mathrm{PRS}_i =
+                \sum_{j=1}^{M}
+                \beta_j \cdot G_{ij}
+                \]
+              </div>
+              <div style="font-size: 0.5em; line-height: 1.5em; text-align: left;">
+                <ul>
+                  <li><strong>\(\mathrm{PRS}_i\)</strong>: Polygenic risk score for individual \(i\)</li>
+                  <li><strong>\(M\)</strong>: Total number of SNPs used in the score</li>
+                  <li><strong>\(\beta_j\)</strong>: Effect size of SNP \(j\) from a GWAS (log-odds ratio or regression coefficient)</li>
+                  <li><strong>\(G_{ij}\)</strong>: Genotype dosage for individual \(i\) at SNP \(j\) (0, 1, or 2 risk alleles)</li>
+                </ul>
+              </div>
+            </div>
+            <div class="fragment">
+              <img src="images/polygenic.png" style="width: 100%;">
+            </div>
+          </div>
+          <br>
+          <div class="fragment" style="font-size: 0.75em;">
+            <ul>
+              <li>Sum of risk alleles corresponding to a phenotype of interest in each individual</li>
+              <li>Weighted by the effect size estimate of the most powerful GWAS on the phenotype</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3>Applications of PRSs</h3>
+          <img src="images/prs_application.jpg" style="width: 90%;">
+        </section>
+
+      </section>
+
+      <!-- PRS IN AFRICAN POPULATIONS -->
+      <section>
+        <section data-background-color="white" id="prs-africa">
+          <img src="../../../assets/icons/africa.gif" style="height: 300px; margin-bottom: -25px;">
+          <h1>PRS in African Populations</h1>
+
+        </section>
+      </section>
+
+      <section>
+        <section data-background-color="white" id="">
+          <img src="../../../assets/icons/portfolio.gif" style="height: 300px; margin-bottom: -25px;">
+          <h1></h1>
+
+        </section>
+      </section>
+
+      <!-- EBD -->
 
       <!-- ERA OF BIG DATA -->
       <section>
@@ -393,6 +945,7 @@
       backgroundTransition: 'fade',
       hash: true,
       plugins: [ RevealZoom, RevealMarkdown, RevealHighlight ],
+      plugins: [ RevealMath.MathJax3 ]
     });
   </script>
 </body>
