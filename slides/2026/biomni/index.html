@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Polygenic [Risk] Scores: The Basics</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/theme/white.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/highlight/monokai.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;600&display=swap">
+  <link rel="stylesheet" type="text/css" href="../../../assets/plugins/asciinema/dist/bundle/asciinema-player.css">
+  
+  <script src="../../../assets/plugins/asciinema/dist/bundle/asciinema-player.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/math/math.js"></script>
+  
+  <!-- <link rel="stylesheet" href="../../../assets/css/my_style_fixed.css"> -->
+  <link rel="stylesheet" href="../../../assets/css/my_style.css">
+
+
+  <script>
+  window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)']],
+    displayMath: [['\\[', '\\]']]
+  }
+  };
+  </script>
+</head>
+
+<!--  -->
+<body>
+  <!-- START REVEAL -->
+  <div class="reveal">
+    <!-- START SLIDE CONTENT -->
+    <div class="slides">
+      <!-- COVER PAGE -->
+      <section data-auto-animate>
+        <section data-background-color="white" data-auto-animate="cover">
+          <p style="margin-bottom:-50px; font-size:3.5em;"><b>ChatGPT <em>et al</em> 2026</b></p>
+          <p style="margin-bottom:100px; font-size:1.5em"><em>404 Scientist Not Found!</em></p>
+          <p style="margin-bottom:-25px;">by Phelelani Mpangase</p>
+          <p style="margin-bottom:75px; font-size:0.75em"><a href="mailto:someone@example.com">phelelani.mpangase@wits.ac.za</a></p>
+          <p style="margin-bottom:-25px;">SBIMB Journal Club  |  04 September 2026</p>
+        </section>
+
+        <section data-background-color="white" data-auto-animate="cover">
+          <p style="margin-bottom:-50px; font-size:3.5em;"><b>Biomni <em>et al</em> 2026</b></p>
+          <p style="margin-bottom:100px; font-size:1.5em"><em>404 Scientist Not Found!</em></p>
+          <p style="margin-bottom:-25px;">by Phelelani Mpangase</p>
+          <p style="margin-bottom:75px; font-size:0.75em"><a href="mailto:someone@example.com">phelelani.mpangase@wits.ac.za</a></p>
+          <p style="margin-bottom:-25px;">SBIMB Journal Club  |  04 September 2026</p>
+        </section>
+
+        <section>
+          <img style="width: 100%;" src="images/biomni_paper.png">
+        </section>
+      </section>
+
+      <!-- PATTERNS OF INHERITANCE -->
+      <section>
+        <section data-background-color="black">
+          <h2>Too much data... not enough scientists!</h2>
+        </section>
+
+        <section data-auto-animate>
+          <img style="width: 100%;" src="../../../assets/images/big_data.jpg" class="img" alt="Big Data">
+          <p class="link-ref" style="margin-top: -10px;">
+            <a href="https://ars.els-cdn.com/content/image/1-s2.0-S2590262822000090-gr2_lrg.jpg">https://ars.els-cdn.com/content/image/1-s2.0-S2590262822000090-gr2_lrg.jpg</a>
+          </p>
+        </section>
+
+        <section>
+          <h2>Progress limited by human bandwidth...</h2>
+
+          <div class="three-cols" style="font-size: 0.8em;">
+            <div class="icon-stack fragment">
+              <img src="images/workflow.gif">
+              Scientific research requires complex workflows
+            </div>
+            <div class="icon-stack fragment">
+              <img src="images/time.gif">
+              Each workflow takes a long time and costly
+            </div>
+            <div class="icon-stack fragment">
+              <img src="images/scale.gif">
+              Need new ways of scaling expertise
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 style="margin: 5rem;">Can't we just make more scientists?</h2>
+
+          <div class="three-cols" style="font-size: 0.8em;">
+            <div class="icon-stack fragment">
+              <img src="images/old.gif">
+              Training is slow & expensive
+            </div>
+            <div class="icon-stack fragment">
+              <img src="images/science.gif">
+              Science is getting advanced
+            </div>
+            <div class="icon-stack fragment">
+              <img src="images/training.gif">
+              Reduced human expertise
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section>
+        <section data-background-color="black">
+          <h2>We must rethink how to scale scientific expertise...</h2>
+        </section>
+
+        <section data-auto-animate="llms">
+          <h2>Large Language Models (LLMs) Agents</h2>
+          <div class="fragment">
+            <img style="width: 60%; margin-top: 2rem;" src="images/llm.png">
+          </div>
+        </section>
+
+        <section data-auto-animate="llms">
+          <h2>Large Language Models (LLMs) Agents</h2>
+          <div class="">
+            <img style="width: 50%; margin-top: 5rem;" src="images/llm_agents.png">
+          </div>
+          <p class="fragment" style="margin-top: 5rem;">Can an LLM agent be extended to do biomedicine?</p>
+        </section>
+      </section>
+
+      <section>
+        <section data-background-color="black">
+          <h2>The future of biomedical research is agentic...</h2>
+        </section>
+
+        <section>
+          <h2>Build a virtual AI biologist...</h2>
+          <div class="four-cols" style="font-size: 0.75em;">
+            <div class="icon-stack fragment">
+              <img src="images/automate.gif">
+              Automate biomedical research
+            </div>
+            <div class="icon-stack fragment">
+              <img src="images/fast.gif">
+              Perform tasks much faster
+            </div>
+            <div class="icon-stack fragment">
+              <img src="images/multitask.gif">
+              Tackle many tasks at once
+            </div>
+            <div class="icon-stack fragment">
+              <img src="images/idea.gif">
+              Suggest/explore novel hypotheses
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 style="margin-top: 5rem;">However, there are limitations...</h2>
+          <div class="two-cols" style="font-size: 0.75em;">
+            <div class="icon-stack fragment">
+              <img src="images/excel.gif">
+              Models excel at generalised reasoning
+            </div>
+            <div class="icon-stack fragment">
+              <img src="images/fail.gif">
+              Lack domain-specific compatibility
+            </div>
+          </div>
+          <h3 class="fragment" style="margin-top: 7rem;">AI cannot do biology without an executable<br>"environment" to take action in.</h3>
+        </section>
+          
+        <section>
+          <img style="width: 100%;" src="images/biomni_resource.png">
+        </section>
+      </section>
+
+      <section>
+        <section data-background-color="black">
+          <h2>Curating the unified biomedical action space...</h2>
+        </section>
+
+        <section>
+          <img style="width: 32%; margin-top: -2rem;" src="images/figure_1a.png">
+        </section>
+      </section>
+
+      <section>
+        <section data-background-color="black">
+          <h2>Biomni-E1:<br>Unified biomedical action space...</h2>
+        </section>
+
+        <section>
+          <img style="width: 60%; margin-top: -2rem;" src="images/figure_1b.png">
+        </section>
+      </section>
+
+      <section>
+        <section data-background-color="black">
+          <h2>Biomni-A1:<br>Reasoning and action composition process...</h2>
+        </section>
+        <section>
+          <img style="width: 43%; margin-top: -2rem;" src="images/figure_1c.png">
+        </section>
+        <section>
+          <img style="width: 100%; margin-top: 0rem;" src="images/biomni-a1.png">
+        </section>
+      </section>
+
+      <section>
+        <section data-background-color="black">
+          <h2>Biomni excels on biomedical research tasks...</h2>
+        </section>
+        <section>
+          <h3 style="margin-bottom: 10rem;">Performance across general benchmarks...</h3>
+          <img class="fragment" style="width: 75%; margin-top: -2rem;" src="images/figure_2a.png">
+        </section>
+
+        <section>
+          <h3 style="margin-bottom: 10rem;">Performance on expert level tasks...</h3>
+          <img class="fragment" style="width: 75%; margin-top: -2rem;" src="images/figure_2b.png">
+        </section>
+
+        <section>
+          <h3 style="margin-bottom: 10rem;">Reinforcement learning...</h3>
+          <img class="fragment" style="width: 75%; margin-top: -2rem;" src="images/figure_2c.png">
+        </section>
+
+        <section>
+          <h3>Other Biomni case studies...</h3>
+          <div class="three-cols" style="font-size: 0.75em; margin-bottom: 5rem;">
+            <div class="icon-stack fragment">
+              <img src="images/watch.gif">
+              Analysing wearable sensor data
+            </div>
+            <div class="icon-stack fragment">
+              <img src="images/cell.gif">
+              Single-cell RNA/ATAC-seq data
+            </div>
+            <div class="icon-stack fragment">
+              <img src="images/science.gif">
+              Designing laboratory protocols
+            </div>
+          </div>
+
+          <div class="two-cols" style="font-size: 0.75em;">
+            <div class="icon-stack fragment">
+              <img src="images/protein.gif">
+              Protein sequence thermostability
+            </div>
+            <div class="icon-stack fragment">
+              <img src="images/robotics.gif">
+              Orchestrating robotics wet-lab instruments
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- TAKE HOME! -->
+      <section>
+        <section data-background-color="black" id="take_home">
+          <h2>Take home...</h2>
+        </section>
+
+        <section>
+          <h3>Biomni envisions AI augmenting human scientists<br>and accelerating discovery...</h3>
+          <div class="two-cols" style="margin-top: 5rem; font-size: 0.9em;">
+            <div class="fragment">
+              <ul>
+                <li>Powerful platform biomedical research...</li>
+                <ul>
+                  <li>Target and drug discovery</li>
+                  <li>Clinical settings</li>
+                  <li>Consumer health</li>
+                </ul>
+              </ul>
+            </div>
+            <div class="fragment">
+              <ul>
+                <li>Several limitations remain...</li>
+                <ul>
+                  <li>Evaluated tasks only a subset of the field</li>
+                  <li>Key domains remain unexplored</li>
+                  <li>Recent literature - foundation concepts?</li>
+                  <li>Consider a larger range of publications</li>
+                  <li>Structured prompts - generalizability?</li>
+                </ul>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <img src="images/questions.gif" style="width: 30%; margin-bottom: -25px;">
+        </section>
+      </section>
+        <!-- END SLIDE CONTENT -->
+    </div>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/zoom/zoom.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/markdown/markdown.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/highlight/highlight.js"></script>
+  <script>
+    Reveal.initialize({
+      width: 1600,
+      height: 900,
+      margin: 0.02,
+      // minScale: 0.2,
+      // maxScale: 5.0,
+      backgroundTransition: 'fade',
+      hash: true,
+      plugins: [ RevealZoom, RevealMarkdown, RevealHighlight ],
+      plugins: [ RevealMath.MathJax3 ]
+    });
+  </script>
+</body>
+</html>
