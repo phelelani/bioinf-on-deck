@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Gene Expression and Brain Function</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/theme/white.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/highlight/monokai.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;600&display=swap">
+  <link rel="stylesheet" type="text/css" href="../../../assets/plugins/asciinema/dist/bundle/asciinema-player.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <script src="../../../assets/plugins/asciinema/dist/bundle/asciinema-player.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/math/math.js"></script>
+  
+  <!-- <link rel="stylesheet" href="../../../assets/css/my_style_fixed.css"> -->
+  <link rel="stylesheet" href="../../../assets/css/my_style.css">
+
+<style>
+  /* ---------- Light academic theme ---------- */
+  :root {
+    --bg: #FAF9F3;
+    --ink: #222222;
+    --accent: #67C9Ca;
+    --accent-soft: #67C9Ca;
+    --story: #047475;
+    --story-soft: #67C9Ca;
+    --poll: #2E7D32;
+    --poll-soft: #EAF5EB;
+    --muted: #6B6B6B;
+  }
+  /* slide chrome */
+  .slide-footer {
+    position: absolute; bottom: 12px; left: 24px; right: 24px;
+    display: flex; justify-content: space-between;
+    font-size: 0.42em; color: var(--muted);
+  }
+  .kicker {
+    display: inline-block; font-size: 0.5em; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.4em;
+    border: 2px solid var(--accent); border-radius: 999px; padding: 0.2em 0.9em;
+  }
+  .kicker.story { color: var(--story); border-color: var(--story); }
+  .kicker.poll  { color: var(--poll);  border-color: var(--poll); }
+
+  /* title slide */
+  .title-slide { text-align: center; }
+  .title-slide h1 { font-size: 1.7em; color: var(--ink); }
+  .title-slide .series { color: var(--accent); font-size: 0.6em; letter-spacing: 0.15em; text-transform: uppercase; }
+  .title-slide .subtitle { color: var(--muted); font-size: 0.6em; margin-top: 1em; }
+
+  /* two-column layout */
+  .cols { display: flex; gap: 40px; align-items: center; }
+  .cols .col-text { flex: 1 1 45%; }
+  .cols .col-fig  { flex: 1 1 55%; }
+  .col-fig img { max-height: 62vh; }
+  .figcap { font-size: 0.38em; color: var(--muted); margin-top: 8px; line-height: 1.3; }
+
+  /* central dogma diagram */
+  .dogma { display: flex; align-items: center; justify-content: center; gap: 40px; margin: 30px 0; }
+  .dogma .molecule {
+    border-radius: 16px; padding: 26px 34px; text-align: center;
+    font-size: 1.15em; font-weight: bold; color: #fff;
+  }
+  .dogma .dna   { background: #0279EE; }
+  .dogma .rna   { background: #75A025; }
+  .dogma .prot  { background: #FF9400; }
+  .dogma .mol-sub { display: block; font-size: 0.55em; font-weight: normal; margin-top: 6px; }
+  .dogma .step { text-align: center; color: var(--muted); font-size: 0.55em; max-width: 200px; }
+  .dogma .step .fa-solid { display: block; font-size: 1.8em; color: var(--accent); margin-bottom: 4px; }
+
+  /* synapse flow */
+  .synflow { display: flex; align-items: stretch; justify-content: center; gap: 15px; margin-top: 24px; flex-wrap: wrap; }
+  .synflow .node {
+    background: #fff; border: 2px solid var(--accent); border-radius: 12px;
+    padding: 14px 16px; text-align: center; font-size: 0.62em; width: 250px;
+  }
+  .synflow .node i { font-size: 1.7em; color: var(--accent); display: block; margin-bottom: 8px; }
+  .synflow .arrow { align-self: center; color: var(--accent); font-size: 0.8em; }
+
+  /* generic list styling */
+  .reveal ul { margin-left: 0.4em; }
+  .reveal ul li { margin: 0.45em 0; line-height: 1.3; }
+  .big-list li { font-size: 1.05em; }
+  .reveal .fragment.poll-correct.current-fragment { color: var(--poll); font-weight: bold; }
+
+  /* poll slides */
+  .poll-slide { text-align: center; }
+  .poll-slide h2 { font-size: 1.25em; }
+  .poll-options { display: inline-block; text-align: left; margin-top: 0.6em; font-size: 1.0em; }
+  .poll-options li { margin: 0.5em 0; list-style: none; }
+  .poll-answer { margin-top: 0.7em; font-size: 0.85em; color: var(--poll); font-weight: bold; }
+
+  /* story slides */
+  .story-slide { }
+  .story-box {
+    background: var(--story-soft); border-left: 10px solid var(--story);
+    border-radius: 8px; padding: 18px 26px; font-size: 0.72em; line-height: 1.45;
+    color: #000000;
+  }
+  .story-lesson { margin-top: 0.7em; font-size: 0.8em; }
+  .story-lesson b { color: var(--story); }
+
+  /* take-home */
+  .takehome li { font-size: 1.05em; margin: 0.7em 0; }
+  .takehome i { color: var(--accent); margin-right: 0.4em; }
+
+  /* references */
+  .refs { font-size: 0.5em; line-height: 1.5; color: var(--muted); }
+  .refs li { margin: 0.35em 0; }
+
+  .small-note { font-size: 0.55em; color: var(--muted); }
+  .accent { color: var(--accent); font-weight: bold; }
+</style>
+
+  <script>
+  window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)']],
+    displayMath: [['\\[', '\\]']]
+  }
+  };
+  </script>
+</head>
+
+<!--  -->
+<body>
+  <!-- START REVEAL -->
+  <div class="reveal">
+    <!-- START SLIDE CONTENT -->
+    <div class="slides">
+      <!-- COVER PAGE -->
+      <section data-auto-animate>
+        <section data-background-color="white" data-auto-animate="cover">
+          <div style="margin-top: 0rem; display: flex; justify-content: center; align-items: center; gap: 2rem;">
+            <img src="logos/logo_1.png" style="height: 75px;">
+            <img src="logos/logo_2.png" style="height: 75px;">
+            <img src="logos/logo_3.png" style="height: 75px;">
+          </div>
+          <p style="margin-top: 12rem; color: blue; font-size: 0.75em; text-transform: uppercase; font-weight: bold;">Neurogenetic Webinar Series</p>
+          <p style="margin-top: -1.5rem; font-size: 1.75em;"><b>Gene Expression and Brain Function</b></p>
+          <p style="margin-top: -2.5rem; font-size: 1.25em">...from code to consequence</p>
+          <p style="margin-top: 12rem; font-size: 0.6em;">by Phelelani Mpangase</p>
+          <p style="margin-top: -1.5rem; font-size: 0.6em"><a href="mailto:someone@example.com">phelelani.mpangase@wits.ac.za</a></p>
+          <!-- <p style="font-size:0.75em; margin-top: 3rem">Sydney Brenner Institute for Molecular Bioscience  |  Biomedical Informatics and Translational Science -->
+            <!-- <br>Faculty of Health Sciences -->
+            <!-- <br>University of the Witwatersrand</p> -->
+          <div style="display: flex; justify-content: center; align-items: center; gap: 1rem; margin-top: -2rem;">
+            <img src="../../../assets/logos/sbimb-10-logo.png" style="height: 75px;">
+            <img src="../../../assets/logos/wits-fsh-logo.png" style="height: 100px;">
+            <img src="../../../assets/logos/witsbits.png" style="height: 100px;">
+          </div>
+        </section>
+      </section>
+
+<!-- ============ 0. BACKGROUND ============ -->
+      <section>
+        <section data-background-color="black" data-auto-animate="objectives">
+          <h2>...in the next 30 minutes</h2>
+        </section>
+
+        <section data-auto-animate="objectives">
+          <h2>...in the next 30 minutes</h2>
+          <div class="three-cols" style="font-size: 0.75em;">
+            <div class="icon-stack fragment">
+              <img src="images/one.gif">
+              Explain the "central dogma of molecular biology" in one sentence
+            </div>
+            <div class="icon-stack fragment">
+              <img src="images/two.gif">
+              Describe what "gene expression" means and why cells expresses different sets of genes
+            </div>
+            <div class="icon-stack fragment">
+              <img src="images/three.gif">
+              Connect gene expression to real brain function and diseases you see in everyday
+            </div>
+          </div>
+        </section>
+      </section>
+
+<!-- ============ 17. DOSAGE ============ -->
+
+      <section>
+        <section data-background-color="black">
+          <h2>Same DNA. Different cells. Why?</h2>
+        </section>
+        
+        <section>
+          <h2>Every cell in your body contains the same DNA</h2>
+          <p class="fragment" data-fragment-index="1">...but how much of it is actually switched on in a typical cell?</p>
+          <p class="kicker poll fragment" data-fragment-index="2" style="margin-top: 5rem;">Poll &mdash; hands up!</p>
+          <div class="two-cols" style="align-content: center;">
+            <div>
+              <img class="fragment" data-fragment-index="3" style="width: 15rem; margin-top: 0rem;" src="images/cell.gif">
+              <img class="fragment" data-fragment-index="3" style="width: 15rem; margin-top: -´1rem;" src="images/neuron.gif">
+              <img class="fragment" data-fragment-index="2" style="width: 15rem; margin-top: -´1rem;" src="images/red_blood_cell.gif">
+            </div>
+            <div class="fragment" data-fragment-index="2" style="text-align: left;">
+              <ol type="a" style="font-size: 0.75em; margin-top: 3.5rem;">
+                <li>About 1% — almost everything is off</li>
+                <li>About 10%</li>
+                <li class="fragment highlight-blue" data-fragment-index="3" >About 25% - 50%</li>
+                <li>All of it — every gene, all the time</li>
+              </ol>
+            </div>
+          </div>
+          <p class="fragment" data-fragment-index="3" style="margin-top: 5rem; color: #0279EE;">...a typical cell is actively using a large share of its ~20,000 genes,<br>but which ones and how much is <b>what makes it that particular type of cell!!</b></p>
+        </section>
+
+        <section>
+          <h2>Why should clinicians care about gene expression?</h2>
+          <div class="story-box fragment">
+            Every working thing in your patient's brain is a <b>protein built from a gene, right now, in that neuron</b>.<br>
+            Every ion channel firing an action potential,  every receptor receiving a signal, and every enzyme making serotonin.
+            </ul>
+          </div>
+
+          <div class="three-cols" style="font-size: 0.75em;">
+            <div class="icon-stack fragment">
+              <img src="images/drugs.gif">
+              Drugs prescribed by doctors work on proteins produced by genes
+            </div>
+            <div class="icon-stack fragment">
+              <img src="images/neurodegenerative.gif">
+              Many neurological diseases stem from genes expressed at the wrong level, place, or time
+            </div>
+            <div class="icon-stack fragment">
+              <img src="images/gene.gif">
+              RNA tests, gene therapy and antisense drugs - all target gene expression
+            </div>
+          </div>
+        </section>
+
+        <section data-auto-animate="dogma">
+          <h2>If every cell has the same DNA... why are cells different?</h2>
+          <p class="fragment">The answer is the most important idea in Molecular Biology - the <strong>Central Dogma:</strong></p>
+          <div class="dogma" style="margin-top: 10rem;">
+            <div class="molecule dna fragment"><i class="fa-solid fa-dna"></i> DNA<span class="mol-sub">"the archive"<br>(full recipe book)</span></div>
+            <div class="step fragment"><i class="fa-solid fa-arrow-right"></i>TRANSCRIPTION<br>copying a recipe</div>
+            <div class="molecule rna fragment"><i class="fa-solid fa-file-lines"></i> RNA<span class="mol-sub">"the working copy"<br>(one recipe)</span></div>
+            <div class="step fragment"><i class="fa-solid fa-arrow-right"></i>TRANSLATION<br>building the product</div>
+            <div class="molecule prot fragment"><i class="fa-solid fa-gears"></i> PROTEIN<span class="mol-sub">"the worker"<br>(does the actual job)</span></div>
+          </div>
+        </section>
+      </section>
+
+<!-- ============ 17. DOSAGE ============ -->
+
+      <section>
+        <section data-background-color="black">
+          <h2>How does DNA become function?</h2>
+        </section>
+
+        <section>
+          <h2>What is a gene?</h2>
+          <div class="three-cols" style="font-size: 0.75em; margin-top: 5rem;">
+            <div class="icon-stack fragment">
+              <img src="images/recipe.gif">
+              <p>Stretch of DNA that carries a recipe for one protein</p>
+            </div>
+            <div class="icon-stack fragment">
+              <img src="images/book.gif">
+              <p>Humans have about 20,000 protein-coding genes</p>
+            </div>
+            <div class="icon-stack fragment">
+              <img src="images/switch.gif">
+              <p>Each recipe has control switches in front of it</p>
+            </div>
+          </div>
+          <div class="story-box fragment" style="margin-top: 5rem;">
+            <i class="fas fa-book-open"></i> Think of the genome as a recipe book with ~20,000 recipes.<br>
+            <i class="fas fa-bookmark"></i> Every cell owns the same book, but reads different page — different bookmarks in each cell type.<br>
+          </div>
+        </section>
+
+        <section>
+          <h2>How does a recipe become a working machine?</h2>
+          <div class="synflow" style="margin-top: 7.5rem;">
+            <div class="node fragment" data-fragment-index="1"><i class="fa-solid fa-dna"></i><b>Gene switched ON</b><br>the cell decides to read this recipe</div>
+            <div class="arrow fragment" data-fragment-index="2"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="node fragment" data-fragment-index="2"><i class="fa-solid fa-copy"></i><b>Transcription</b><br>DNA is copied into messenger RNA (mRNA)</div>
+            <div class="arrow fragment" data-fragment-index="3"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="node fragment" data-fragment-index="3"><i class="fa-solid fa-industry"></i><b>Translation</b><br>the mRNA is read, amino acid by amino acid</div>
+            <div class="arrow fragment" data-fragment-index="4"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="node fragment" data-fragment-index="4"><i class="fa-solid fa-gears"></i><b>Protein</b><br>channel, receptor, enzyme, scaffold</div>
+          </div>
+          <div class="three-cols" style="font-size: 0.5em; margin-top: 5rem;">
+            <div class="icon-stack fragment";>
+              <img src="images/volume.gif">
+              <p><strong>Expression level:</strong><br>- how many mRNA copies are made<br>- volume knob, not just on/off</p>
+            </div>
+            <div class="icon-stack fragment">
+              <img src="images/upload.gif">
+              <p><strong>More mRNA:</strong><br>- more protein<br>- more of that function</p>
+            </div>
+            <div class="icon-stack fragment">
+              <img src="images/download.gif">
+              <p><strong>Less mRNA:</strong><br>- less protein<br>- less of that function</p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>...so then what of "Gene Expression"?</h2>
+          <div class="story-box fragment" style="font-style:normal; margin-top: 5rem;">
+            <b>Gene expression</b> is the process by which the information in a gene is used to make a working product (RNA &rarr; protein),<br>and <b>how much</b> of that product is being made at a given moment.
+          </div>
+          <div class="three-cols" style="font-size: 0.75em;">
+            <div class="icon-stack fragment">
+              <img src="images/clean.gif">
+              <p><b>Housekeeping genes:</b><br>Expressed in nearly every cell (basic energy, cell structure)</p>
+            </div>
+            <div class="icon-stack fragment">
+              <img src="images/aim.gif">
+              <p><b>Cell-specific genes:</b><br>Expressed only in certain cells<br>e.g., insulin, haemoglobin, neurotransmitter</p>
+            </div>
+            <div class="icon-stack fragment">
+              <img src="images/time.gif">
+              <p><b>Expression changes over time:</b><br>Development, learning, stress, sleep, disease, etc...</p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Who controls the switches?</h2>
+          <div class="three-cols" style="font-size: 0.75em; margin-top: 5rem;">
+            <div class="icon-stack fragment">
+              <img src="images/start.gif">
+              <p><b>Promoters:</b><br>the "start here" sign directly in front of each gene</p>
+            </div>
+            <div class="icon-stack fragment">
+              <img src="images/switch.gif">
+              <p><b>Transcription factors:</b><br>proteins that bind switches and turn genes up or down</p>
+            </div>
+            <div class="icon-stack fragment">
+              <img src="images/enhancer.gif">
+              <p><b>Enhancers:</b><br>remote-control switches that can sit far away from the genes</p>
+            </div>
+          </div>
+          <div class="story-box fragment" style="margin-top: 5rem; font-style:normal;">
+            Sitting <em>on top of</em> the DNA is a second, dynamic layer of controls.<br>This layer is <b>epigenetics</b>, and consist of chemical marks that decide whether the switches can even be reached.
+          </div>
+        </section>
+      </section>
+
+<!-- ============ 17. DOSAGE ============ -->
+
+      <section>
+        <section data-background-color="black" data-auto-animate="brain">
+          <h2>What happens when there's fault in the switches?</h2>
+        </section>
+        
+        <section data-auto-animate="brain">
+          <h2>What happens when there's fault in the switches?</h2>
+          <p class="kicker story fragment" data-fragment-index="1">Clinical story 1</p>
+          <div class="story-box fragment" data-fragment-index="1">
+            A 14-month-old girl, born after a normal pregnancy, had been smiling, babbling and almost walking. Over a few months her parents noticed she <b>stopped gaining words, lost purposeful hand use</b>, and began repetitive hand-wringing movements. Head growth slowed. Genetic testing confirms a mutation in <b>MECP2</b> &mdash; <b>Rett syndrome</b>.
+          </div>
+          <div class="fragment" style="font-size: 0.75em; margin-top: 5rem;">
+            <ul>
+              <li><b>MECP2</b> does not build a structural protein... it is a <b>regulator of gene expression</b></li>
+              <li>It reads chemical marks on the DNA and adjusts other genes</li>
+              <li>One faulty regulator:</li>
+              <ul>
+                <b>hundreds of downstream genes</b> expressed at the wrong levels</li>
+                <li>neurons fail to mature properly</li>
+              </ul>
+              <li>Lesson: <b>the control system itself can be the disease</b></li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2>Why does gene expression matter to the brain?</h2>
+          <div class="two-cols" style="margin-top: 5rem; font-size: 0.9em;">
+            <div class="fragment">
+              <img src="images/brain.png" alt="Lateral view of the brain">
+            </div>
+            <div class="story-box fragment" style="text-align: left; height: 300px; margin-top: 10rem;">
+              <ul>
+                <li>Neurons are among the most <b>complex cells</b> in the body<br> &mdash; and most are <b>never replaced</b></li>
+                <li>The brain has one of the <b>richest transcriptomes</b> of any organ<br> &mdash; a huge share of your genes is active there</li>
+                <li>Neurons must <b>keep proteins working for decades</b><br> &mdash; expression must be maintained, precisely, continuously</li>
+                <li>and uniquely: in the brain, expression <b>responds to experience</b></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>What is a neuron actually made of?</h2>
+          <p class="fragment">Every functional part of a neuron is a protein that a gene expressed...</p>
+          <div class="two-cols" style="margin-top: 5rem; font-size: 0.9em;">
+            <div class="fragment">
+              <img src="images/neuron.png" alt="Structure of a neuron">
+            </div>
+            <div class="story-box fragment" style="text-align: left; height: 420px; margin-top: 3rem;">
+              <ul>
+              <li><i class="fa-solid fa-bolt" style="color:var(--accent)"></i> <b>Ion channels</b><br> &mdash; generate electrical signals</li>
+              <li><i class="fa-solid fa-tower-broadcast" style="color:var(--accent)"></i> <b>Receptors</b><br> &mdash; receive chemical messages</li>
+              <li><i class="fa-solid fa-flask" style="color:var(--accent)"></i> <b>Enzymes</b><br> &mdash; synthesize neurotransmitters (e.g. dopamine, serotonin)</li>
+              <li><i class="fa-solid fa-bridge" style="color:var(--accent)"></i> <b>Synaptic proteins</b><br> &mdash; release and recycle transmitters</li>
+              <li><i class="fa-solid fa-shield-halved" style="color:var(--accent)"></i> <b>Structural &amp; support proteins</b><br> &mdash; keep the cell alive and wired</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section data-auto-animate="thought">
+          <h2>How does gene expression become a thought?</h2>
+          <p class="fragment" data-fragment-index="1">Follow one signal across a synapse... every step is an expressed protein doing its job:</p>
+          <div class="synflow" style="margin-top: 5rem;">
+            <div class="node fragment" data-fragment-index="2"><i class="fa-solid fa-bolt"></i><b>Action potential</b><br>Na&#8314; channels open &mdash; the electrical spike</div>
+            <div class="arrow fragment" data-fragment-index="3"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="node fragment" data-fragment-index="3"><i class="fa-solid fa-plus"></i><b>Ca&#178;&#8314; flows in</b><br>through voltage-gated channels</div>
+            <div class="arrow fragment" data-fragment-index="4"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="node fragment" data-fragment-index="4"><i class="fa-solid fa-vial"></i><b>Vesicles fuse</b><br>synaptic proteins release transmitter</div>
+            <div class="arrow fragment" data-fragment-index="5"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="node fragment" data-fragment-index="5"><i class="fa-solid fa-tower-broadcast"></i><b>Receptors bind</b><br>the next neuron is excited or inhibited</div>
+          </div>
+          <div class="two-cols" style="margin-top: 5rem;">
+            <div class="col-fig fragment" style="flex:0 0 46%;">
+              <img src="images/sodium_channel.png" alt="Voltage-gated sodium channel" style="max-height:34vh;">
+              <!-- <p class="figcap">A voltage-gated sodium channel &mdash; the protein behind the spike. Mutations in its gene (<i>SCN1A</i>) cause severe epilepsy (Dravet syndrome). Image: CC BY-SA 3.0, via Wikimedia Commons.</p> -->
+            </div>
+            <div class="story-box fragment" style="font-size: 0.75em; text-align: left; height: 270px;">
+              <ul>
+                <li>Change the <b>number</b> of channels expressed<br> &mdash; change how easily the neuron fires</li>
+                <li>Change the <b>type</b> of receptor expressed<br> &mdash; change what the neuron responds to</li>
+                <li><b>Expression levels tune the excitability of the brain</b></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Can the correct gene, wrongly expressed, cause disease?</h2>
+          <p class="kicker story fragment" data-fragment-index="1">Clinical story 2</p>
+          <div class="story-box fragment" data-fragment-index="1">
+            A 42-year-old lawyer notices clumsiness and irritability. His father died of the same progressive illness. Over the next decade: involuntary movements (chorea), psychiatric change, dementia. Diagnosis: <b>Huntington disease</b> &mdash; a <b>CAG repeat expansion</b> in the <b>HTT</b> gene, inherited as an autosomal dominant trait.
+          </div>
+          <div class="two-cols fragment" style="font-size: 0.75em; margin-top: 5rem;">
+            <div>
+              <img style="margin-top: 3rem;" src="images/htt.png">
+            </div>
+            <div>
+              <ul>
+              <li>The gene is <b>present and transcribed normally</b></li>
+              <li>The problem is the <b>protein product itself</b>:
+                <br> &mdash; an expanded, misfolded huntingtin 
+                <br> &mdash;  <b>poisons neurons</b>, especially in the striatum 
+                <br> &mdash; <b>distorts the expression of many other genes</b></li>
+              <li>Lesson: disease can come from <b>what a gene expresses</b>, not only how much</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Too much, too little, or at the wrong time?</h2>
+          <p class="fragment">Across neurogenetics, one principle keeps appearing — "expression dosage":</p>
+          <div class="three-cols" style="margin-top: 3rem; font-size: 0.6em;">
+            <div class="icon-stack fragment">
+              <img src="images/download.gif">
+              <p><b>Too little:</b>
+                <br>loss of one working copy
+                <br>- <i>MECP2</i> in Rett syndrome
+                <br>- <i>SMN1</i> in spinal muscular atrophy
+              </p>
+            </div>
+            <div class="icon-stack fragment">
+              <img src="images/upload.gif">
+              <p><b>Too much:</b>
+                <br>extra copies: gene duplications
+                <br>- <i>PMP22</i> duplication in CMT1A neuropathy
+                <br>- extra chr21 in Down syndrome
+              </p>
+            </div>
+            <div class="icon-stack fragment">
+              <img src="images/time.gif">
+              <p><b>Wrong time:</b>
+                <br> a gene expressed during the wrong developmental window disrupts brain wiring
+              </p>
+            </div>
+          </div>
+        </section>
+      </section>
+      
+      <section>
+        <section data-background-color="black"> 
+          <h2>Can the brain change its own gene expression?</h2>
+        </section>
+
+        <section>
+          <h2>Which of these do you think changes gene expression<br>in the brain?</h2>
+          <p class="kicker poll" style="margin-top: 5rem;">Poll &mdash; hands up!</p>
+          <div class="three-cols fragment">
+            <div class="icon-stack" >
+              <img src="images/sleep.gif">
+              <p>a) A good night's sleep</p>
+            </div>
+            <div class="icon-stack">
+              <img src="images/exercise.gif">
+              <p>b) Exercise</p>
+            </div>
+            <div class="icon-stack">
+              <img src="images/drugs.gif">
+              <p>c) Antidepressants</p>
+            </div>
+          </div>
+          <p class="fragment" style="margin-top: 5rem; color: #0279EE;"><b>ALL OF THE ABOVE!</b><br>Sleep, exercise, drugs, stress &mdash; even a good conversations &mdash;  all leave traces in <b>various genes your neurons are expressing!</b></p>
+        </section>
+
+        <section>
+          <h2>Can your experiences change your brain's gene expression?</h2>
+          <p class="kicker story fragment" data-fragment-index="1">Clinical story 3 &mdash; everyday practice</p>
+          <div class="story-box fragment" data-fragment-index="1">
+            Think of a patient recovering from depression who starts exercising, sleeps better, and begins therapy. Weeks later they are measurably sharper and steadier. Part of what changed: neurons boosted expression of <b>BDNF</b> &mdash; <b>brain-derived neurotrophic factor</b> &mdash; a gene whose protein helps neurons <b>grow, survive, and strengthen their connections</b>.
+          </div>
+          <div class="two-cols fragment" style="font-size: 0.75em; margin-top: 3rem;">
+            <div>
+              <img style="margin-top: -3rem;" src="images/brain_clock.gif">
+            </div>
+            <div>
+              <ul>
+                <li><b>Activity-dependent expression:</b>
+                  <br> &mdash; "neurons that fire together"
+                  <br> &mdash; turn on genes that <b>wire together</b>
+                  <br> &mdash; the molecular basis of learning and memory</li>
+                <li>Exercise, sleep and enrichment <b>raise BDNF expression</b></li>
+                <li>Chronic stress and sleep loss <b>lower it</b></li>
+                <li>Even your <b>body clock</b> is gene expression: 
+                  <br> &mdash; clock genes (<i>CLOCK</i>, <i>PER</i>) run a ~24-hour cycle
+                  <br> &mdash; jet lag is your clock genes re-syncing</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section>
+        <section data-background-color="black">
+          <h2>Can we actually measure/see gene expression?</h2>
+        </section>
+
+        <section>
+          <h2>RNA sequencing (RNA-seq)</h2>
+          <div class="fragment">
+            <img style="width: 70%;" src="images/transcriptomics.png" class="img" alt="transcriptomics">
+            <p class="link-ref" style="margin-top: -10px;">
+              <a href="https://biotech.ncsu.edu/2024/10/28/what-is-transcriptomics-and-why-is-it-important-heres-what-dr-cartwright-has-to-say/">https://biotech.ncsu.edu/2024/10/28/what-is-transcriptomics-and-why-is-it-important-heres-what-dr-cartwright-has-to-say/</a>
+            </p>
+          </div>
+        </section>
+      </section>
+
+<!-- ============ 17. DOSAGE ============ -->
+
+      <section>
+        <section data-background-color="black" data-auto-animate="remember">
+          <h2>Remember these three things...</h2>
+        </section>
+
+        <section data-auto-animate="remember">
+          <h2>Remember these three things...</h2>
+          <div class="three-cols" style="font-size: 0.75em;">
+            <div class="icon-stack fragment">
+              <img src="images/protein.gif">
+              <p><strong>The Central Dogma:</strong><br>DNA <i class="fa-solid fa-arrow-right"></i> RNA <i class="fa-solid fa-arrow-right"></i> Protein<br>archive <i class="fa-solid fa-arrow-right"></i> copy <i class="fa-solid fa-arrow-right"></i> worker</p>
+            </div>
+            <div class="icon-stack fragment">
+              <img src="images/gene.gif">
+              <p><strong>Gene expression:</strong><br>"Volume knob" <i class="fas fa-volume-up"></i> <br>Different expression in every cell</p>
+            </div>
+            <div class="icon-stack fragment">
+              <img src="images/neurodegenerative.gif">
+              <p><strong>Brain function:</strong><br>Expressed proteins<br>channels, receptors, enzymes</p>
+            </div>
+          </div>
+          
+          <div class="story-box fragment" style="margin-top: 5rem;">
+            <h3>Above the genes sits another control layer:<br>"The Epigenetics"</h3>
+            <p>Dr. Luicer Ingasia will tell you more...</p>
+          </div>
+        </section>
+      </section>
+      <!-- END SLIDE CONTENT -->
+    </div>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/zoom/zoom.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/markdown/markdown.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/highlight/highlight.js"></script>
+  <script>
+    Reveal.initialize({
+      width: 1600,
+      height: 900,
+      margin: 0.02,
+      // minScale: 0.2,
+      // maxScale: 5.0,
+      backgroundTransition: 'fade',
+      hash: true,
+      plugins: [ RevealZoom, RevealMarkdown, RevealHighlight ],
+      plugins: [ RevealMath.MathJax3 ]
+    });
+  </script>
+</body>
+</html>
