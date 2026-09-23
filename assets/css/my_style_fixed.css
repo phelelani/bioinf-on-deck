@@ -1,0 +1,169 @@
+/* --- General List Styles --- */
+li {
+    margin: 0; /* Simplified from 0px 0 */
+}
+
+/* Level 1: Filled Circle */
+ul li {
+    list-style-type: disc;
+}
+
+/* Level 2: Empty Circle */
+ul ul li {
+    list-style-type: circle;
+}
+
+/* Level 3: Square (Updated to match your previous comment) */
+ul ul ul li {
+    list-style-type: square;
+}
+
+/* Level 4: Lower Alpha (Specifically for nested ordered lists) */
+ul ul ul ol li, 
+ol ol ol ol li {
+    list-style-type: lower-alpha;
+}
+
+/* --- Typography --- */
+h1, h2, h3 {
+    text-transform: none !important;
+    font-family: "Fira Sans", sans-serif;
+}
+
+.citation {
+    font-size: 0.45em;
+    opacity: 0.65;
+    margin-top: 0.5rem;
+}
+
+/* --- Icons & Layout Stacks --- */
+.icon {
+    margin-right: 10px;
+}
+
+.icon-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-stack img, 
+.icon-stack svg {
+    height: 150px;
+    margin-bottom: 0;
+}
+
+.icon-stack p, 
+.icon-stack h2, 
+.icon-stack h3 {
+    margin: 0;
+    text-align: center;
+}
+
+/* --- Code & Preformatted --- */
+pre {
+    margin: auto !important;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.reveal pre code {
+    font-size: 0.85em;
+    max-height: 700px;
+}
+
+/* --- Multi-Column Environments --- */
+.five-cols, .four-cols, .three-cols {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1em;
+}
+
+.five-cols { gap: 0.5em; }
+.four-cols, .three-cols { gap: 2em; }
+
+.five-cols > div, 
+.four-cols > div, 
+.three-cols > div {
+    flex: 1;
+    text-align: center;
+    padding: 0 1em;
+}
+
+.two-cols {
+    display: flex;
+    justify-content: space-between;
+    gap: 0;
+    padding: 0;
+}
+
+.two-cols > div {
+    flex: 0 0 50%;
+    text-align: center;
+}
+
+/* Custom Grid Column */
+.two-column-custom {
+    display: grid;
+    grid-template-columns: var(--left, 1fr) var(--right, 1fr);
+    gap: 2rem;
+    align-items: center;
+}
+
+/* 2-Column with Bullet/Image logic */
+.two-cols-bullet {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0;
+}
+
+.two-cols-bullet .col-image {
+    flex: 0 0 20%;
+    max-width: 20%;
+    text-align: center;
+}
+
+.two-cols-bullet .col-text {
+    flex: 0 0 80%;
+    max-width: 80%;
+    text-align: left;
+}
+
+/* --- Positioning Helpers --- */
+.stacked-paragraph {
+    position: relative;
+    height: 80px; 
+}
+
+.stacked-paragraph p,
+.stacked-fragments > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+}
+
+.stacked-paragraph p {
+    text-align: center;
+}
+
+/* --- Reveal.js Specifics --- */
+.reveal .slides section {
+    padding: 0;
+    width: 100%;
+}
+
+.panel-dark {
+    background-color: #1e293b;
+    color: white;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    padding: 1rem; /* Added padding so text doesn't hit the edges */
+}
+
+/* Remove or comment out for production */
+/* body { background: red !important; } */
